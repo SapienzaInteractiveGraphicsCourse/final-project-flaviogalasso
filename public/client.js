@@ -1,12 +1,13 @@
 import * as THREE from '/build/three.module.js';
 import Stats from './jsm/libs/stats.module.js';
+
 import { OrbitControls } from './jsm/controls/OrbitControls.js';
 
 import {RobotMesh} from './RobotMesh.js';
 import {MapMesh} from './MapMesh.js';
 import {MapHandler} from './MapHandler.js';
 import { SkyBox } from './SkyBox.js'
-import { RobotBox } from './RobotBox.js';
+import { PlayerHandler } from './PlayerHandler.js';
 
 const canvas = document.querySelector('.web-gl');
 
@@ -52,16 +53,21 @@ await Robot3DModel.loadModel();
 let Map3DModel = new MapMesh();
 await Map3DModel.loadModel();
 
-
 let MapEntity = new MapHandler(Map3DModel,scene);
 MapEntity.spawnMap();
 
-scene.add(Robot3DModel.model);
-/*
+
 let playerPosition = new THREE.Vector3( 0, 5, 0 );
-let PlayerRobot = new RobotBox(scene, Robot3DModel, playerPosition, "Player", clock)
-PlayerRobot.spawn();
-*/
+let PlayerRobot = new PlayerHandler(scene,playerPosition,Robot3DModel);
+PlayerRobot.init();
+
+let playerList = [PlayerRobot.RobotModel.mesh];
+let environmentList = [MapEntity.mesh];
+let projectileList = []
+
+PlayerRobot.RobotModel.updateLists(playerList,environmentList,projectileList);
+
+
 
 // Render Setup
 const renderer = new THREE.WebGLRenderer({
@@ -88,7 +94,9 @@ const render = ()=>{
 
 // Recursion function for animation
 const animate = ()=>{
+    var clockDelta = clock.getDelta();
     requestAnimationFrame(animate);
+    PlayerRobot.update(clockDelta);
     render();
     stats.update();
 }

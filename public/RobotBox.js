@@ -1,38 +1,76 @@
 import * as THREE from '/build/three.module.js';
+import { cloneGltf } from './cloneGltf.js';
 
 class RobotBox{
-    constructor(scene, robotmesh, position, name, clock){
+    constructor(scene, RobotMesh, position, name){
+        this.debug = true;
         this.scene = scene;
-        console.log(robotmesh);
-        this.model = robotmesh.model.clone();
+        this.enemyList = [];
+        this.environmentList = [];
+        this.projectileList = [];
+        
+        this.gltfModel = cloneGltf(RobotMesh.gltfModel);
+        this.mesh = this.gltfModel.scene;
+        
+
+
         this.originPosition = position;
         this.name = name;
 
-        this.moveVelocity = 0.0;
-        this.rotateVelocity = 0.0;
+        this.moveVelocity = 1.0;
+        this.rotateVelocity = 1.0;
         this.jumpVelocity = 0.1;
+        this.gravityVelocity = 0.1;
+        this.health = 100;
+        this.hitDamage = 50;
+        this.hasBeenHit = false;
 
         this.lerpTime = 10;
         this.idealRotationAngle =  new THREE.Vector3();
+        this.idealRotationAngle.set(0,0,0);
         this.rotationAngle =  new THREE.Vector3();
+        this.rotationAngle.set(0,0,0);
 
         this.aimMesh = new THREE.ArrowHelper(this.pointingDirection, this.pointingPosition);
         this.aimMesh.setColor(0xff0000)
         this.aimMesh.setLength (1000, 1, 1) 
 
-        this.clock = clock;
+        this.rayCastClock = new THREE.Clock();
+        this.rayCastClock.getDelta();
         this.lastRayCastTime = 0;
         this.rayCastTime = 50;
         this.frontBlock = false;
         this.rightBlock = false;
         this.leftBlock = false;
         this.backBlock = false;
+
+        this.rayCastHorizontalHeight = 3.0;
+        this.rayCastMinimumDistanceForBump = 0.5;
+        this.rayCastLenght=1.5;
+        this.rayCastDownLength = 0.5;
+        this.rayCastUpLength = 2;
+        
         this.rayCastDown = new THREE.Raycaster();
         this.rayCastUp = new THREE.Raycaster();
         this.rayCastFront = new THREE.Raycaster();
-        this.rayCastRight = new THREE.Raycaster();
-        this.rayCastLeft = new THREE.Raycaster();
         this.rayCastBack = new THREE.Raycaster();
+        this.rayCastFrontHelper = new THREE.ArrowHelper(
+            new THREE.Vector3(0, 0, 1),new THREE.Vector3(0, 0, 0),
+            this.rayCastLenght,0xff0000,
+          );
+        this.rayCastBackHelper = new THREE.ArrowHelper(
+            new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, 0),
+            this.rayCastLenght, 0x00ff00,
+          );
+        this.rayCastDownHelper = new THREE.ArrowHelper(
+            new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, 0),
+            this.rayCastDownLength, 0x0000ff,
+          );
+          this.rayCastUpHelper = new THREE.ArrowHelper(
+            new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, 0),
+            this.rayCastUpLength, 0xff00ff,
+          );
+
 
         this.state = 'Idle';
         this.stateChanged = true;
@@ -57,30 +95,29 @@ class RobotBox{
         this.thetaShoot =           {ArmShoulderDx:0,       ArmShoulderSx:90,       ArmElboxSx:90,       ArmElboxDx:0,       LegHipDx:90,       LegHipSx:90,     LegKneeDx:0,     LegKneeSx:0, Head:0};
     }
     
+    updateLists(playerList,environmentList,projectileList){
+        this.playerList = playerList;
+        this.environmentList = environmentList;
+        this.projectileList = projectileList;
+    }
   
     spawn(){
-        //this.mesh.scale.set(1, 1, 1);
-        //this.mesh.position.set(this.originPosition.x, this.originPosition.y, this.originPosition.z);
-        this.scene.add(this.model);
- 
-        //this.initCollider();
-        //this.initAnimations();
+        this.mesh.scale.set(1, 1, 1);
+        this.mesh.position.set(this.originPosition.x, this.originPosition.y, this.originPosition.z);
+        this.mesh.traverse(function ( child ) {
+            if ( child instanceof THREE.Mesh ) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+            }
+        });
 
+        this.initAnimations();
+        this.scene.add(this.mesh);
+        this.scene.add(this.rayCastBackHelper);
+        this.scene.add(this.rayCastFrontHelper)
+        this.scene.add(this.rayCastDownHelper);
+        this.scene.add(this.rayCastUpHelper);
     }
-
-
-    initCollider(){
-            this.mesh.traverse(function ( child ) {
-                if ( child instanceof THREE.Mesh ) {
-                    child.geometry.computeBoundingBox();
-                    child.castShadow = true;
-                    child.receiveShadow = true;
-                }
-            });
-            this.collider = new THREE.Box3()
-            this.colliderHelper = new THREE.Box3Helper( this.collider, 0xff0000 );
-            this.scene.add(this.colliderHelper);
-        }
 
        setVelocities(moveVelocity,rotateVelocity,gravityVelocity,jumpVelocity) {
            this.moveVelocity = moveVelocity;
@@ -89,36 +126,47 @@ class RobotBox{
            this.jumpVelocity = jumpVelocity;
        }
 
-        update(commands, otherEntities, clockDelta){
+        update(commands, clockDelta){
             this.updateAnimation(commands);
-            this.updateCollisions(otherEntities);
+            this.updateCollisions();
+            this.updateHealth();
             this.updateMovement(commands,clockDelta);
             this.shoot(commands);
         }
 
- 
+        updateHealth(){
+            if(this.hasBeenHit && this.health >= 0){
+                console.log(this.name + "has been hit");
+                this.health -= this.hitDamage;
+                this.hasBeenHit = false;
+            }
+        }
+
+        shoot(commands){
+
+        }
 
         updateMovement(commands,clockDelta) {
+            //console.log(this.mesh)
         
+            
             if (commands.rotate)  
                 this.idealRotationAngle.y += this.rotateVelocity * clockDelta;  
             if (commands.unrotate)  
                 this.idealRotationAngle.y -= this.rotateVelocity*clockDelta;
             
+            
             this.rotationAngle.lerp(this.idealRotationAngle, this.lerpTime * clockDelta);
             this.mesh.rotation.y = this.rotationAngle.y;
 
-            if(commands.forward){
+            if(commands.forward && !this.frontBlock){
                 this.mesh.position.z += Math.cos(this.rotationAngle.y) * this.moveVelocity * clockDelta;
                 this.mesh.position.x += Math.sin(this.rotationAngle.y) * this.moveVelocity * clockDelta;
             }
-            if(commands.backward){
+            if(commands.backward && !this.backBlock){
                 this.mesh.position.z -= Math.cos(this.rotationAngle.y) * this.moveVelocity * clockDelta;
                 this.mesh.position.x -= Math.sin(this.rotationAngle.y) * this.moveVelocity * clockDelta;
             }
-
-            this.pointingPosition.copy(this.mesh.position);
-            this.pointingPosition.y += 0.5;
 
               if(commands.jump && this.jumpAvailable){
                   this.jumpAvailable = false;
@@ -141,55 +189,53 @@ class RobotBox{
             }
 
             if(this.bumpUp){
-                this.mesh.position.y += this.moveVelocity * clockDelta;
+                this.mesh.position.y += 2*this.gravityVelocity * clockDelta;
             }
         }
 
-        shoot(commands){
-        }
+        updateCollisions(){
+            var elapsedTime = this.rayCastClock.getElapsedTime();
+            if(elapsedTime*1000 - this.lastRayCastTime > this.rayCastTime){
+                this.lastRayCastTime = elapsedTime*1000;
 
-        updateCollisions(mapMesh){
-            //console.log(this.clock)
-            if(this.clock.elapsedTime*1000 - this.lastRayCastTime > this.rayCastTime){
-                this.lastRayCastTime = this.clock.elapsedTime*1000;
                 const meshPosition = this.mesh.position.clone();
-                const meshRotation = this.mesh.rotation.clone();
+                const meshRotation = this.mesh.quaternion.clone();
+                var meshPositionShifted = meshPosition.clone();
+                meshPositionShifted.y += this.rayCastHorizontalHeight;
+                //console.log(meshPositionShifted);
                 const down = new THREE.Vector3( 0, - 1, 0 );
-                const up= new THREE.Vector3( 0, 1, 0 );
-
-                //var left = new THREE.Vector3( 1, 0, 0 );
-                //var right = new THREE.Vector3( -1, 0, 0 );
+                const up = new THREE.Vector3( 0, 1, 0 );
                 var front = new THREE.Vector3( 0, 0, 1 );
                 var back = new THREE.Vector3( 0, 0, -1 );
 
-                var far = 1;
 
-                //left.applyEuler(meshRotation);
-                //right.applyEuler(meshRotation);
-                front.applyEuler(meshRotation);
-                back.applyEuler(meshRotation);
+                front.applyQuaternion(meshRotation);
+                back.applyQuaternion(meshRotation);
 
-                this.collider.setFromObject( this.mesh );
 
+                
                 // DOWN
                     this.rayCastDown.set(meshPosition, down );
-                    this.rayCastDown.far = far;
-                    var intersections = this.rayCastDown.intersectObject( mapMesh.mesh, true );
+                    this.rayCastDown.far = this.rayCastDownLength;
+                    this.rayCastDownHelper.position.copy(this.rayCastDown.ray.origin);
+                    this.rayCastDownHelper.setDirection(this.rayCastDown.ray.direction);
+                    var intersections = this.rayCastDown.intersectObjects( this.environmentList, true );
+                    
 
                     if(intersections.length > 0){
-                        if(intersections[0].distance <= 0.7) this.bumpUp = true;
-                        else this.bumpUp = false;
                         this.collisionGroundHappened = true;
                     }
                     else{
                         this.collisionGroundHappened = false;
-                        this.bumpUp = false;
                     }
-                /*
+                
                 // UP
                     this.rayCastUp.set(meshPosition, up );
-                    this.rayCastUp.near = far;
-                    var intersections = this.rayCastUp.intersectObject( mapMesh.mesh, true );
+                    this.rayCastUp.far = this.rayCastUpLength;
+                    this.rayCastUpHelper.position.copy(this.rayCastUp.ray.origin);
+                    this.rayCastUpHelper.setDirection(this.rayCastUp.ray.direction);
+                    var intersections = this.rayCastUp.intersectObjects( this.environmentList, true );
+                    console.log(intersections)
 
                     if(intersections.length > 0){
                         this.bumpUp = true;
@@ -197,67 +243,44 @@ class RobotBox{
                     else{
                         this.bumpUp = false;
                     }
-                    */
+                    
 
-        
-
-                    //console.log(intersections)
 
                 
                 // FRONT
-                    this.rayCastFront.set(meshPosition, front)
+                    this.rayCastFront.set(meshPositionShifted, front)
                     this.rayCastFront.near = 0.0;
-                    this.rayCastFront.far = far;
+                    this.rayCastFront.far = this.rayCastLenght;
 
-                    intersections = this.rayCastFront.intersectObject( mapMesh.mesh, true );
+                    intersections = this.rayCastFront.intersectObjects( this.environmentList, true );
+                    this.rayCastFrontHelper.position.copy(this.rayCastFront.ray.origin);
+                    this.rayCastFrontHelper.setDirection(this.rayCastFront.ray.direction);
 
                     if(intersections.length > 0) this.frontBlock = true;
                     else this.frontBlock = false;
 
-                // BACK
-                    this.rayCastBack.set(meshPosition, back)
-                    this.rayCastBack.near = 0.0;
-                    this.rayCastBack.far = far;
+                    var enemy_intersections = this.rayCastFront.intersectObjects( this.enemyList, true );
+                    var projectile_intersections = this.rayCastFront.intersectObjects( this.projectileList, true );
+                    if(enemy_intersections.length > 0 || projectile_intersections.length > 0) hasBeenHit = true;
+                    else this.hasBeenHit = false;
 
-                    intersections = this.rayCastBack.intersectObject( mapMesh.mesh, true );
+                // BACK
+                    this.rayCastBack.set(meshPositionShifted, back)
+                    this.rayCastBack.near = 0.0;
+                    this.rayCastBack.far = this.rayCastLenght;
+
+                    intersections = this.rayCastBack.intersectObjects( this.environmentList, true );
+                    this.rayCastBackHelper.position.copy(this.rayCastBack.ray.origin);
+                    this.rayCastBackHelper.setDirection(this.rayCastBack.ray.direction);
 
                     if(intersections.length > 0) this.backBlock = true;
                     else this.backBlock = false;
 
-                    /*
-                // RIGHT
+                    enemy_intersections = this.rayCastFront.intersectObjects( this.enemyList, true );
+                    projectile_intersections = this.rayCastFront.intersectObjects( this.projectileList, true );
+                    if(enemy_intersections.length > 0 || projectile_intersections.length > 0) hasBeenHit = true;
+                    else this.hasBeenHit = false;
 
-                    this.rayCastRight.set(meshPosition, right)
-                    this.rayCastRight.near = 0.0;
-                    this.rayCastRight.far = far;
-
-                    intersections = this.rayCastRight.intersectObject( mapMesh.mesh, true );
-
-                    if(intersections.length > 0) this.rightBlock = true;
-                    else this.rightBlock = false;
-
-
-                // LEFT
-                    this.rayCastLeft.set(meshPosition, left)
-                    this.rayCastLeft.near = 0.0;
-                    this.rayCastLeft.far = far;
-
-                    intersections = this.rayCastLeft.intersectObject( mapMesh.mesh, true );
-
-                    if(intersections.length > 0) this.leftBlock = true;
-                    else this.leftBlock = false;
-                    */
-
-                /*
-                this.collisionGroundHappened = false;
-                for (const box of boxesArray){
-
-                    if (this.collider.intersectsBox( box.collider)){
-                        console.log(this.mesh.position.angleTo(box.mesh.position) * 180 / Math.PI)
-                        this.collisionGroundHappened = true;
-                    }
-                }
-                */
             }
 
         }

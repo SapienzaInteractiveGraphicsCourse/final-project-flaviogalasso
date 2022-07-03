@@ -6,16 +6,8 @@ class RobotMesh{
     }
 async loadModel(){
     this.loader = new GLTFLoader();
-    this.data = await this.loader.loadAsync("./models/droid.gltf");
-    this.model = this.data.scene;
-
-    
-    this.model.traverse(function ( child ) {
-        if ( child instanceof THREE.Mesh ) {
-            child.castShadow = true;
-            child.receiveShadow = true;
-        }
-    });
+    this.gltfModel = await this.loader.loadAsync("./models/droid.gltf");
+    this.model = this.gltfModel;
     console.log(this.model)
 }
 }
