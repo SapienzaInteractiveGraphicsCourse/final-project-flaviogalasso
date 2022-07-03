@@ -1,13 +1,21 @@
 import * as THREE from '/build/three.module.js';
 import Stats from './jsm/libs/stats.module.js';
 import { OrbitControls } from './jsm/controls/OrbitControls.js';
-import { GLTFLoader } from './jsm/loaders/GLTFLoader.js';
+
+import {RobotMesh} from './RobotMesh.js';
+import {MapMesh} from './MapMesh.js';
+import {MapHandler} from './MapHandler.js';
+import { SkyBox } from './SkyBox.js'
+import { RobotBox } from './RobotBox.js';
 
 const canvas = document.querySelector('.web-gl');
 
 // showing fps
 const stats = new Stats();
 document.body.appendChild(stats.domElement);
+
+//clock for physics
+const clock = new THREE.Clock();
 
 // Scene Setup
 const scene = new THREE.Scene();
@@ -31,11 +39,34 @@ scene.add( light );
 const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
 scene.add( directionalLight );
 
+
+let SkyBoxEntity = new SkyBox("sky_sp_arcadia");
+scene.background = SkyBoxEntity.skyboxTexture;
+
+const axesHelper = new THREE.AxesHelper( 5 );
+scene.add( axesHelper );
+
+let Robot3DModel = new RobotMesh();
+await Robot3DModel.loadModel();
+
+let Map3DModel = new MapMesh();
+await Map3DModel.loadModel();
+
+
+let MapEntity = new MapHandler(Map3DModel,scene);
+MapEntity.spawnMap();
+
+scene.add(Robot3DModel.model);
+/*
+let playerPosition = new THREE.Vector3( 0, 5, 0 );
+let PlayerRobot = new RobotBox(scene, Robot3DModel, playerPosition, "Player", clock)
+PlayerRobot.spawn();
+*/
+
 // Render Setup
 const renderer = new THREE.WebGLRenderer({
     antialias: true,
     canvas: canvas,
-    outputEncoding: THREE.sRGBEncoding
 });
 
 
@@ -49,22 +80,6 @@ console.log(renderer);
 // Adding orbit controls
 const controls = new OrbitControls(camera, renderer.domElement);
 
-const loader = new GLTFLoader();
-var droid_loaded = false;
-var droid_model = null;
-
-loader.load( './models/droid.gltf', function ( gltf ) {
-    droid_loaded = true;
-    droid_model = gltf.scene;
-	scene.add( gltf.scene );
-    console.log(gltf)
-
-}, undefined, function ( error ) {
-	console.error( error );
-} );
-
-
-
 
 // render function to render the scene
 const render = ()=>{
@@ -74,13 +89,11 @@ const render = ()=>{
 // Recursion function for animation
 const animate = ()=>{
     requestAnimationFrame(animate);
-    if(droid_loaded){
-        droid_model.getObjectByName("base_1").rotation.z += 0.1;
-    }
     render();
     stats.update();
 }
 animate();
+
 
 // Resizing window to make responsive
 const windowResize = ()=>{
