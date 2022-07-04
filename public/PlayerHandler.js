@@ -5,6 +5,7 @@ class PlayerHandler{
     constructor(scene, position,RobotMesh){
         this.scene = scene;
         this.name = "Player";
+        this.RobotMesh = RobotMesh
 
         this.commands = {forward:false, strafeLeft:false, strafeRight:false, rotate:false, backward:false, unrotate:false, jump:false, shift:false, shootPress:false};
         this.moveVelocity = 5.0;
@@ -12,7 +13,8 @@ class PlayerHandler{
         this.gravityVelocity = 5.0;
         this.jumpOffset = 0.1;
         this.originPosition = position;
-        this.RobotModel = new RobotBox(this.scene, RobotMesh, this.originPosition, this.name);
+        this.RobotModel = new RobotBox(this.scene,   this.RobotMesh, this.originPosition, this.name);
+
     }
 
     init(){
@@ -20,16 +22,36 @@ class PlayerHandler{
         this.RobotModel.spawn();
         document.addEventListener('keydown', (e) => this.keyDownEvent(e),false);
         document.addEventListener('keyup', (e) => this.keyUpEvent(e),false);
-        //document.addEventListener('mouseup', (e) => this.mouseUpEvent(e),false);
-        //document.addEventListener('mousedown', (e) => this.mouseDownEvent(e),false);
-        //document.addEventListener("mousemove", (e) => this.mouseMoveEvent(e), false);
+        document.addEventListener('mouseup', (e) => this.mouseUpEvent(e),false);
+        document.addEventListener('mousedown', (e) => this.mouseDownEvent(e),false);
+
+    }
+
+    reset(){
+        this.RobotModel.reset();
+        for (var property in this.commands) {
+            this.commands[property] = false;
+          }
+        this.RobotModel = new RobotBox(this.scene, this.RobotMesh, this.originPosition, this.name);
     }
 
     update(clockDelta){
         this.RobotModel.update(this.commands,clockDelta);
     }
 
-    keyDownEvent(event) {
+    drawPointer(mouse){
+        this.RobotModel.drawPointer(mouse);
+    }
+
+    getPosition(){
+        return this.RobotModel.mesh.position.clone();
+    }
+
+    getQuaternion(){
+        return this.RobotModel.mesh.quaternion.clone();
+    }
+
+        keyDownEvent(event) {
         switch (event.keyCode){
             case 87: //w
             this.commands.forward = true;
@@ -100,7 +122,17 @@ class PlayerHandler{
                     this.commands.shoot = true;
                     break;
             }
-}
+        }
+
+        mouseUpEvent(e){
+            switch (e.which){
+                case 1:
+                    this.commands.shoot = false;
+            }
+
+        }
+
+
 }
 
 export {PlayerHandler};

@@ -8,6 +8,7 @@ import {MapMesh} from './MapMesh.js';
 import {MapHandler} from './MapHandler.js';
 import { SkyBox } from './SkyBox.js'
 import { PlayerHandler } from './PlayerHandler.js';
+import {GameHandler} from './GameHandler.js';
 
 const canvas = document.querySelector('.web-gl');
 
@@ -54,18 +55,9 @@ let Map3DModel = new MapMesh();
 await Map3DModel.loadModel();
 
 let MapEntity = new MapHandler(Map3DModel,scene);
-MapEntity.spawnMap();
-
 
 let playerPosition = new THREE.Vector3( 0, 5, 0 );
 let PlayerRobot = new PlayerHandler(scene,playerPosition,Robot3DModel);
-PlayerRobot.init();
-
-let playerList = [PlayerRobot.RobotModel.mesh];
-let environmentList = [MapEntity.mesh];
-let projectileList = []
-
-PlayerRobot.RobotModel.updateLists(playerList,environmentList,projectileList);
 
 
 
@@ -86,6 +78,19 @@ console.log(renderer);
 // Adding orbit controls
 const controls = new OrbitControls(camera, renderer.domElement);
 
+// Starting Game Handler
+
+const GameEntity = new GameHandler(PlayerRobot,MapEntity,controls,scene)
+GameEntity.startIntro();
+
+renderer.domElement.addEventListener("click", function(event){
+    if(GameEntity.gameState == "Intro"){
+        GameEntity.startGame();
+    }
+}, true);
+
+
+
 
 // render function to render the scene
 const render = ()=>{
@@ -96,7 +101,7 @@ const render = ()=>{
 const animate = ()=>{
     var clockDelta = clock.getDelta();
     requestAnimationFrame(animate);
-    PlayerRobot.update(clockDelta);
+    GameEntity.update(clockDelta);
     render();
     stats.update();
 }
