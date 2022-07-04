@@ -1,29 +1,6 @@
-import { Camera } from 'three';
 import * as THREE from '/build/three.module.js';
-
-class ProjectileHandler{
-    constructor(projectileList,scene){
-        this.projectileList = projectileList;
-    }
-
-    reset(){
-
-    }
-
-
-}
-
-class PickUpHandler {
-    constructor(pickupList,scene){
-        this.pickupList = pickupList;
-    }
-
-    reset(){
-
-    }
-
-
-}
+import {ProjectileHandler} from './ProjectileHandler.js'
+import {PickUpHandler} from './PickUpHandler.js'
 
 class EnemyHandler{
     constructor(enemyList){
@@ -49,7 +26,7 @@ class GameHandler {
         this.projectileList = [];
         this.pickupList = [];
 
-        this.ProjectileHandler = new ProjectileHandler(this.projectileList);
+        this.ProjectileHandler = new ProjectileHandler(this.projectileList,this.scene);
         this.PickUpHandler = new PickUpHandler(this.pickupList);
         this.EnemyHandler = new EnemyHandler(this.enemyList);
 
@@ -87,10 +64,9 @@ class GameHandler {
         this.resetEntities();
         this.PlayerHandler.init();
         this.MapEntity.spawnMap();
+        this.PlayerHandler.RobotModel.setProjectileHandler(this.ProjectileHandler);
         this.gameState = "Game";
         this.Controls.autoRotate = false;
-  
-
     }
 
     update(clockDelta){
@@ -105,13 +81,15 @@ class GameHandler {
     }
 
     updateGame(clockDelta){
-        this.environmentList = [this.MapEntity.mesh];
+        this.environmentList = [this.MapEntity];
 
         this.updateTPSCamera(clockDelta);
 
         this.PlayerHandler.RobotModel.updateLists(this.playerList,this.environmentList,this.projectileList);
         this.PlayerHandler.drawPointer(this.mouse);
         this.PlayerHandler.update(clockDelta);
+
+        this.ProjectileHandler.update(clockDelta);
     }
 
     updateTPSCamera(clockDelta) {

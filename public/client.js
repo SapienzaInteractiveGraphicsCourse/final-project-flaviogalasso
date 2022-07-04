@@ -101,6 +101,7 @@ const render = ()=>{
 const animate = ()=>{
     var clockDelta = clock.getDelta();
     requestAnimationFrame(animate);
+    TWEEN.update();
     GameEntity.update(clockDelta);
     render();
     stats.update();

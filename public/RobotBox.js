@@ -2,7 +2,7 @@ import * as THREE from '/build/three.module.js';
 import { cloneGltf } from './cloneGltf.js';
 
 class RobotBox{
-    constructor(scene, RobotMesh, position, name, ProjectileHandler){
+    constructor(scene, RobotMesh, position, name){
         this.debug = true;
         this.scene = scene;
         this.enemyList = [];
@@ -86,7 +86,6 @@ class RobotBox{
         this.shootOffset = new THREE.Vector3(0, 5,0);
         this.shootAvailable = true;
         this.shootAnimationEnded = false;
-        this.ProjectileHandler = ProjectileHandler;
 
         this.thetaIdle =           {ArmShoulderDx:90,       ArmShoulderSx:90,       ArmElboxSx:90,       ArmElboxDx:90,       LegHipDx:90,       LegHipSx:90,     LegKneeDx:0,     LegKneeSx:0, Head:0};
         this.thetaWalkingLegSpread = {ArmShoulderDx:45,       ArmShoulderSx:180-45,   ArmElboxSx:90,       ArmElboxDx:90,     LegHipDx:90+10,       LegHipSx:90-20,      LegKneeDx:0,     LegKneeSx:-20, Head:0};
@@ -99,9 +98,18 @@ class RobotBox{
     }
     
     updateLists(playerList,environmentList,projectileList){
-        this.playerList = playerList;
-        this.environmentList = environmentList;
-        this.projectileList = projectileList;
+
+
+        this.playerList = [];
+        this.environmentList = [];
+        this.projectileList = [];
+        for (var elm of playerList) this.playerList.push(elm.mesh);
+        for (var elm of environmentList) this.environmentList.push(elm.mesh);
+        for (var elm of projectileList) this.projectileList.push(elm.mesh);
+    }
+
+    setProjectileHandler(ProjectileHandler){
+        this.ProjectileHandler = ProjectileHandler;
     }
   
     spawn(){
@@ -156,16 +164,14 @@ class RobotBox{
         }
 
         shoot(commands){
+            //console.log(commands.shoot, this.shootAnimationEnded, this.shootAvailable)
             if(commands.shoot && this.shootAvailable){
+                
                 this.shootAvailable = false;
             }
 
             if( !this.shootAvailable && this.shootAnimationEnded){
-                console.log(this.pointingPosition);
-                var shootingPosition = this.RobotMesh.position.clone();
-                var shootingOrientation = this.RobotMesh.quaternion.clone();
-                var shootingDirection = new THREE.Vector3( 0,0,1).applyQuaternion(shootingOrientation);
-                this.ProjectileHandler.spawnProjectile(shootingPosition, shootingDirection);
+                this.ProjectileHandler.requestShoot(this.aimData,this.name);
                 this.shootAvailable = true;
             }
            
@@ -274,7 +280,7 @@ class RobotBox{
                     this.rayCastUpHelper.position.copy(this.rayCastUp.ray.origin);
                     this.rayCastUpHelper.setDirection(this.rayCastUp.ray.direction);
                     var intersections = this.rayCastUp.intersectObjects( this.environmentList, true );
-                    console.log(intersections)
+                    //console.log(intersections)
 
                     if(intersections.length > 0){
                         this.bumpUp = true;
@@ -298,10 +304,16 @@ class RobotBox{
                     if(intersections.length > 0) this.frontBlock = true;
                     else this.frontBlock = false;
 
+                    /*
                     if(this.name == "Player") var enemy_intersections = this.rayCastFront.intersectObjects( this.enemyList, true );
                     else  var enemy_intersections = this.rayCastFront.intersectObjects( this.playerList, true );
+                    */
                     var projectile_intersections = this.rayCastFront.intersectObjects( this.projectileList, true );
-                    if(enemy_intersections.length > 0 || projectile_intersections.length > 0) hasBeenHit = true;
+                    console.log(projectile_intersections);
+                    if(projectile_intersections.length > 0){
+                        this.hasBeenHit = true;
+                        projectile_intersections[0].hitSomething=true;
+                    } 
                     else this.hasBeenHit = false;
 
                 // BACK
@@ -316,10 +328,16 @@ class RobotBox{
                     if(intersections.length > 0) this.backBlock = true;
                     else this.backBlock = false;
 
+                    /*
                     if(this.name == "Player") var enemy_intersections = this.rayCastFront.intersectObjects( this.enemyList, true );
                     else  var enemy_intersections = this.rayCastFront.intersectObjects( this.playerList, true );
-                    var projectile_intersections = this.rayCastFront.intersectObjects( this.projectileList, true );
-                    if(enemy_intersections.length > 0 || projectile_intersections.length > 0) hasBeenHit = true;
+                    */
+                    console.log(projectile_intersections);
+                    if(projectile_intersections.length > 0){
+                        this.hasBeenHit = true;
+                        projectile_intersections[0].object.hitSomething=true;
+                    } 
+                    else this.hasBeenHit = false;
 
             }
 
