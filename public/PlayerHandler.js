@@ -48,6 +48,12 @@ class PlayerHandler{
         return this.RobotModel.mesh.quaternion.clone();
     }
 
+    getMesh(){
+        return this.RobotModel.mesh.clone();
+    }
+
+    
+
         keyDownEvent(event) {
         switch (event.keyCode){
             case 87: //w

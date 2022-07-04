@@ -1,5 +1,7 @@
 import * as THREE from '/build/three.module.js';
 import { cloneGltf } from './cloneGltf.js';
+import {calculateYAngleBetweenVectors,calculateDirectionBetweenVectors} from './UsefulFunctions.js'
+
 
 class RobotBox{
     constructor(scene, RobotMesh, position, name){
@@ -93,6 +95,7 @@ class RobotBox{
         this.jumpAnimationEnded = false;
 
         this.shootOffset = new THREE.Vector3(-1, 2,2);
+        this.shootTargetOffset = new THREE.Vector3(0,3,0);
         this.shootAvailable = true;
         this.shootAnimationEnded = false;
 
@@ -242,10 +245,36 @@ class RobotBox{
 
             this.aimData.directionVector.copy(mouse.pointVector3D);
             this.aimData.positionVector.copy(shootingOrigin);
+            
 
 
             this.aimLine.position.copy( this.aimData.positionVector);
             this.aimLine.setDirection( this.aimData.directionVector);
+            this.aimLine.setColor(0xffffff);
+        }
+
+        
+        aimAt(object,mouse){
+            if(object == null){
+                if(this.name == "Player"){
+                    this.drawPointer(mouse);
+                }
+                return;
+            }
+            var shootingOrigin = this.shootOffset.clone();
+            shootingOrigin.applyQuaternion(this.mesh.quaternion);
+            shootingOrigin.add(this.mesh.position);
+
+            var targetOrigin = object.position.clone().add(this.shootTargetOffset);
+
+            var targetDirection = calculateDirectionBetweenVectors(targetOrigin,shootingOrigin);
+
+            this.aimData.directionVector.copy(targetDirection);
+            this.aimData.positionVector.copy(shootingOrigin);
+
+            this.aimLine.position.copy( this.aimData.positionVector);
+            this.aimLine.setDirection( this.aimData.directionVector);
+            this.aimLine.setColor(0xff0000);
         }
 
         updateCollisions(){

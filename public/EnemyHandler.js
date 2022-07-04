@@ -40,11 +40,10 @@ class EnemyEntity{
     chasePlayer(PlayerHandler){
         var currentPosition = this.getPosition();
         var targetPosition = PlayerHandler.getPosition();
+        var targetMesh = PlayerHandler.getMesh();
 
-        var playerDirection = calculateDirectionBetweenVectors(targetPosition,currentPosition);
         var result = calculateYAngleBetweenVectors(targetPosition,currentPosition);
-        
-        //this.drawPointer({pointVector3D : playerDirection.clone()});
+        this.RobotModel.aimAt(targetMesh);
 
         if (result.distanceToTarget < 999){
             this.RobotModel.idealRotationAngle.y = result.angleToTarget;
@@ -53,10 +52,6 @@ class EnemyEntity{
             }
             //this.commands.forward = true;
         }
-    }
-
-    drawPointer(mouse){
-        this.RobotModel.drawPointer(mouse);
     }
 
     getPosition(){

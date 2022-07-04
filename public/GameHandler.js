@@ -3,9 +3,6 @@ import {ProjectileHandler} from './ProjectileHandler.js'
 import {PickUpHandler} from './PickUpHandler.js'
 import {EnemyHandler} from './EnemyHandler.js'
 import {PlayerHandler} from './PlayerHandler.js'
-import {calculateYAngleBetweenVectors,calculateDirectionBetweenVectors} from './UsefulFunctions.js'
-
-
 
 class GameHandler {
     constructor(RobotMesh,MapEntity,Controls,scene){
@@ -33,6 +30,7 @@ class GameHandler {
         this.cameraLookAt = new THREE.Vector3(0,4,10);
         this.cameraOffset = new THREE.Vector3(-3,7,-10);
 
+        this.playerAimAt = null;
         this.rayCastAim = new THREE.Raycaster();
         this.rayCastAimHelper = new THREE.ArrowHelper(
             new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, 0),
@@ -97,7 +95,7 @@ class GameHandler {
 
 
         this.PlayerHandler.RobotModel.updateLists(this.enemyList,this.environmentList,this.projectileList);
-        this.PlayerHandler.RobotModel.drawPointer(this.mouse);
+        this.PlayerHandler.RobotModel.aimAt(this.playerAimAt,this.mouse);
         this.PlayerHandler.update(clockDelta);
 
         this.EnemyHandler.update(this.PlayerHandler,clockDelta);
@@ -131,13 +129,12 @@ class GameHandler {
         
         this.Controls.object.position.copy(CameraPosition);
         this.Controls.object.lookAt(CameraTarget);
-        /*
-
+        
         this.mouse.pointVector3D.set(this.mouse.pointVector2D.x, this.mouse.pointVector2D.y, 1.0);
         this.mouse.pointVector3D.unproject(this.Controls.object);
 
         this.mouse.pointVector3D.sub(this.Controls.object.position).normalize();
-        */
+        
 
         // SHOOT HELPER
         
@@ -153,15 +150,9 @@ class GameHandler {
 
 
         if(intersections.length > 0){
-            var target = intersections[0].point.clone();
-            var origin = this.rayCastAim.ray.origin.clone();
-
-            var direction = calculateDirectionBetweenVectors(target,origin);
-
-            console.log(intersections[0])
-            this.mouse.pointVector3D.copy(direction)
-            
+            this.playerAimAt = intersections[0].object.clone();
         }
+        else this.playerAimAt = null;
         
     
 
