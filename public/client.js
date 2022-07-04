@@ -56,10 +56,6 @@ await Map3DModel.loadModel();
 
 let MapEntity = new MapHandler(Map3DModel,scene);
 
-let playerPosition = new THREE.Vector3( 0, 5, 0 );
-let PlayerRobot = new PlayerHandler(scene,playerPosition,Robot3DModel);
-
-
 
 // Render Setup
 const renderer = new THREE.WebGLRenderer({
@@ -80,7 +76,7 @@ const controls = new OrbitControls(camera, renderer.domElement);
 
 // Starting Game Handler
 
-const GameEntity = new GameHandler(PlayerRobot,MapEntity,controls,scene)
+const GameEntity = new GameHandler(Robot3DModel,MapEntity,controls,scene)
 GameEntity.startIntro();
 
 renderer.domElement.addEventListener("click", function(event){

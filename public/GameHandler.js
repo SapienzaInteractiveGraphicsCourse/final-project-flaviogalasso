@@ -1,34 +1,32 @@
 import * as THREE from '/build/three.module.js';
 import {ProjectileHandler} from './ProjectileHandler.js'
 import {PickUpHandler} from './PickUpHandler.js'
+import {EnemyHandler} from './EnemyHandler.js'
+import {PlayerHandler} from './PlayerHandler.js'
 
-class EnemyHandler{
-    constructor(enemyList){
-        this.enemyList = enemyList;
-    }
-
-    reset(){
-
-    }
-
-}
 
 class GameHandler {
-    constructor(PlayerHandler,MapEntity,Controls,scene){
+    constructor(RobotMesh,MapEntity,Controls,scene){
         this.gameState = "Setup";
         this.scene = scene;
         this.MapEntity = MapEntity;
-        this.PlayerHandler = PlayerHandler;
+        this.RobotMesh = RobotMesh;
 
         this.Controls = Controls;
         this.playerList = [];
         this.environmentList = [];
         this.projectileList = [];
         this.pickupList = [];
+        this.enemyList = [];
 
         this.ProjectileHandler = new ProjectileHandler(this.projectileList,this.scene);
         this.PickUpHandler = new PickUpHandler(this.pickupList);
-        this.EnemyHandler = new EnemyHandler(this.enemyList);
+       
+        this.playerPosition = new THREE.Vector3( 0, 5, 0 );
+        this.PlayerHandler = new PlayerHandler(this.scene,this.playerPosition,this.RobotMesh);
+
+        this.EnemyHandler = new EnemyHandler(this.enemyList, this.ProjectileHandler, this.RobotMesh, this.scene);
+
 
         this.cameraLookAt = new THREE.Vector3(0,4,10);
         this.cameraOffset = new THREE.Vector3(-3,7,-10);
@@ -67,6 +65,9 @@ class GameHandler {
         this.PlayerHandler.RobotModel.setProjectileHandler(this.ProjectileHandler);
         this.gameState = "Game";
         this.Controls.autoRotate = false;
+        this.EnemyHandler.spawnEnemy();
+
+        this.enemy = new Enemy()
     }
 
     update(clockDelta){
@@ -85,9 +86,14 @@ class GameHandler {
 
         this.updateTPSCamera(clockDelta);
 
-        this.PlayerHandler.RobotModel.updateLists(this.playerList,this.environmentList,this.projectileList);
+        this.PlayerHandler.RobotModel.updateLists(this.enemyList,this.environmentList,this.projectileList);
         this.PlayerHandler.drawPointer(this.mouse);
         this.PlayerHandler.update(clockDelta);
+
+        this.EnemyHandler.update(this.PlayerHandler,clockDelta);
+        this.EnemyHandler.updateLists(this.playerList,this.environmentList,this.projectileList);
+
+
 
         this.ProjectileHandler.update(clockDelta);
     }
