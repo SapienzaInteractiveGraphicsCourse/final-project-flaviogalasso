@@ -50,11 +50,14 @@ class RobotBox{
         this.rayCastLenght=1.5;
         this.rayCastDownLength = 0.5;
         this.rayCastUpLength = 2;
+        this.rayCastUpShootLength = 6;
         
         this.rayCastDown = new THREE.Raycaster();
         this.rayCastUp = new THREE.Raycaster();
+        this.rayCastUpShoot = new THREE.Raycaster();
         this.rayCastFront = new THREE.Raycaster();
         this.rayCastBack = new THREE.Raycaster();
+
         this.rayCastFrontHelper = new THREE.ArrowHelper(
             new THREE.Vector3(0, 0, 1),new THREE.Vector3(0, 0, 0),
             this.rayCastLenght,0xff0000,
@@ -71,6 +74,12 @@ class RobotBox{
             new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, 0),
             this.rayCastUpLength, 0xff00ff,
           );
+          this.rayCastUpShootHelper = new THREE.ArrowHelper(
+            new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, 0),
+            this.rayCastUpLength, 0xffffff,
+          );
+  
+
 
 
         this.state = 'Idle';
@@ -83,7 +92,7 @@ class RobotBox{
         this.jumpTicks = 0;
         this.jumpAnimationEnded = false;
 
-        this.shootOffset = new THREE.Vector3(0, 5,0);
+        this.shootOffset = new THREE.Vector3(-1, 2,2);
         this.shootAvailable = true;
         this.shootAnimationEnded = false;
 
@@ -97,13 +106,11 @@ class RobotBox{
         this.thetaShoot =           {ArmShoulderDx:0,       ArmShoulderSx:90,       ArmElboxSx:90,       ArmElboxDx:0,       LegHipDx:90,       LegHipSx:90,     LegKneeDx:0,     LegKneeSx:0, Head:0};
     }
     
-    updateLists(playerList,environmentList,projectileList){
-
-
-        this.playerList = [];
+    updateLists(enemyList,environmentList,projectileList){
+        this.enemyList = [];
         this.environmentList = [];
         this.projectileList = [];
-        for (var elm of playerList) this.playerList.push(elm.mesh);
+        for (var elm of enemyList) this.enemyList.push(elm.RobotModel.mesh);
         for (var elm of environmentList) this.environmentList.push(elm.mesh);
         for (var elm of projectileList) this.projectileList.push(elm.mesh);
     }
@@ -129,6 +136,8 @@ class RobotBox{
         this.scene.add(this.rayCastFrontHelper)
         this.scene.add(this.rayCastDownHelper);
         this.scene.add(this.rayCastUpHelper);
+        this.scene.add(this.rayCastUpShootHelper);
+
     }
 
     reset(){
@@ -138,6 +147,7 @@ class RobotBox{
         this.scene.remove(this.rayCastFrontHelper)
         this.scene.remove(this.rayCastDownHelper);
         this.scene.remove(this.rayCastUpHelper);
+        this.scene.remove(this.rayCastUpShootHelper);
     }
 
        setVelocities(moveVelocity,rotateVelocity,gravityVelocity,jumpVelocity) {
@@ -288,6 +298,20 @@ class RobotBox{
                     else{
                         this.bumpUp = false;
                     }
+
+                    this.rayCastUpShoot.set(meshPosition, up );
+                    this.rayCastUpShoot.far = this.rayCastUpShootLength;
+                    this.rayCastUpShootHelper.position.copy(this.rayCastUpShoot.ray.origin);
+                    this.rayCastUpShootHelper.setDirection(this.rayCastUpShoot.ray.direction);
+                    this.rayCastUpShootHelper.setLength (this.rayCastUpShootLength, 1, 1) 
+                    var projectile_intersections = this.rayCastUpShoot.intersectObjects( this.projectileList, true );
+                    //console.log(projectile_intersections);
+                    if(projectile_intersections.length > 0){
+                        this.hasBeenHit = true;
+                        console.log("HIT")
+                        projectile_intersections[0].hitSomething=true;
+                    } 
+                    else this.hasBeenHit = false;
                     
 
 
@@ -304,17 +328,11 @@ class RobotBox{
                     if(intersections.length > 0) this.frontBlock = true;
                     else this.frontBlock = false;
 
-                    /*
-                    if(this.name == "Player") var enemy_intersections = this.rayCastFront.intersectObjects( this.enemyList, true );
-                    else  var enemy_intersections = this.rayCastFront.intersectObjects( this.playerList, true );
-                    */
-                    var projectile_intersections = this.rayCastFront.intersectObjects( this.projectileList, true );
-                    console.log(projectile_intersections);
-                    if(projectile_intersections.length > 0){
-                        this.hasBeenHit = true;
-                        projectile_intersections[0].hitSomething=true;
-                    } 
-                    else this.hasBeenHit = false;
+      
+
+
+
+  
 
                 // BACK
                     this.rayCastBack.set(meshPositionShifted, back)
@@ -327,17 +345,6 @@ class RobotBox{
 
                     if(intersections.length > 0) this.backBlock = true;
                     else this.backBlock = false;
-
-                    /*
-                    if(this.name == "Player") var enemy_intersections = this.rayCastFront.intersectObjects( this.enemyList, true );
-                    else  var enemy_intersections = this.rayCastFront.intersectObjects( this.playerList, true );
-                    */
-                    console.log(projectile_intersections);
-                    if(projectile_intersections.length > 0){
-                        this.hasBeenHit = true;
-                        projectile_intersections[0].object.hitSomething=true;
-                    } 
-                    else this.hasBeenHit = false;
 
             }
 

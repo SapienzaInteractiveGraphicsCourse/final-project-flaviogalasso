@@ -16,7 +16,7 @@ class Projectile{
         this.name = name;
         this.mesh.hitSomething = false;
 
-        this.speedFactor = 50.0;
+        this.speedFactor = 30.0;
 
         this.stepsTaken = 0.0;
         this.stepsThreshold = 50.0;

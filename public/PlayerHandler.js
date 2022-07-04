@@ -39,9 +39,6 @@ class PlayerHandler{
         this.RobotModel.update(this.commands,clockDelta);
     }
 
-    drawPointer(mouse){
-        this.RobotModel.drawPointer(mouse);
-    }
 
     getPosition(){
         return this.RobotModel.mesh.position.clone();

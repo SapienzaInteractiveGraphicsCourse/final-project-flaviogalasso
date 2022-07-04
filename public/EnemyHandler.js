@@ -1,14 +1,15 @@
 import * as THREE from '/build/three.module.js';
 import {RobotBox} from './RobotBox.js'
+import {calculateYAngleBetweenVectors,calculateDirectionBetweenVectors} from './UsefulFunctions.js'
 
 class EnemyEntity{
-    constructor(scene, position,RobotMesh){
+    constructor(scene, position, RobotMesh){
         this.scene = scene;
         this.name = "Enemy";
         this.RobotMesh = RobotMesh
 
         this.commands = {forward:false, strafeLeft:false, strafeRight:false, rotate:false, backward:false, unrotate:false, jump:false, shift:false, shootPress:false};
-        this.moveVelocity = 5.0;
+        this.moveVelocity = 2.0;
         this.rotateVelocity = 5.0;
         this.gravityVelocity = 5.0;
         this.jumpOffset = 0.1;
@@ -39,17 +40,19 @@ class EnemyEntity{
     chasePlayer(PlayerHandler){
         var currentPosition = this.getPosition();
         var targetPosition = PlayerHandler.getPosition();
-       
-        var playerDirection = new THREE.Vector3().subVectors(targetPosition,currentPosition).normalize();
 
-        var dy = targetPosition.x - currentPosition.x;
-        var dx = targetPosition.z - currentPosition.z;
-        var distanceToTarget = Math.sqrt((dx*dx) + (dy*dy));
-        var angleToTarget = Math.atan2(dy,dx);
-
-        this.RobotModel.idealRotationAngle.y = angleToTarget;
+        var playerDirection = calculateDirectionBetweenVectors(targetPosition,currentPosition);
+        var result = calculateYAngleBetweenVectors(targetPosition,currentPosition);
         
-        this.drawPointer({pointVector3D : playerDirection.clone()});
+        //this.drawPointer({pointVector3D : playerDirection.clone()});
+
+        if (result.distanceToTarget < 999){
+            this.RobotModel.idealRotationAngle.y = result.angleToTarget;
+            if(Math.random() > 0.995){
+                this.commands.shoot = true;
+            }
+            //this.commands.forward = true;
+        }
     }
 
     drawPointer(mouse){
@@ -79,6 +82,7 @@ class EnemyHandler{
     spawnEnemy(){
         var NewEnemy = new EnemyEntity(this.scene,new THREE.Vector3(0,5,0), this.RobotMesh);
         NewEnemy.init();
+        NewEnemy.RobotModel.setProjectileHandler(this.ProjectileHandler);
         this.enemyList.push(NewEnemy);
     }
 
