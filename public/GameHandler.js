@@ -5,11 +5,12 @@ import {EnemyHandler} from './EnemyHandler.js'
 import {PlayerHandler} from './PlayerHandler.js'
 
 class GameHandler {
-    constructor(RobotMesh,MapEntity,Controls,scene){
+    constructor(RobotMesh,AlienMesh,MapEntity,Controls,scene){
         this.gameState = "Setup";
         this.scene = scene;
         this.MapEntity = MapEntity;
         this.RobotMesh = RobotMesh;
+        this.AlienMesh = AlienMesh;
 
         this.Controls = Controls;
         this.playerList = [];
@@ -24,7 +25,7 @@ class GameHandler {
         this.playerPosition = new THREE.Vector3( 0, 5, 0 );
         this.PlayerHandler = new PlayerHandler(this.scene,this.playerPosition,this.RobotMesh);
 
-        this.EnemyHandler = new EnemyHandler(this.enemyList, this.ProjectileHandler, this.RobotMesh, this.scene);
+        this.EnemyHandler = new EnemyHandler(this.enemyList, this.ProjectileHandler, this.AlienMesh, this.scene);
 
 
         this.cameraLookAt = new THREE.Vector3(0,4,10);
@@ -60,7 +61,7 @@ class GameHandler {
         this.gameState = "Intro";
         this.Controls.object.position.set( 0, 20, 5 );
         this.Controls.autoRotate = true;
-        this.Controls.target = this.PlayerHandler.RobotModel.mesh.position;
+        this.Controls.target = this.PlayerHandler.getPosition();
         console.log(this.Controls)
 
     }
@@ -92,6 +93,8 @@ class GameHandler {
         this.playerList = [this.PlayerHandler];
 
         this.updateTPSCamera(clockDelta);
+
+
 
 
         this.PlayerHandler.RobotModel.updateLists(this.enemyList,this.environmentList,this.projectileList);
@@ -143,14 +146,15 @@ class GameHandler {
         this.rayCastAim.far = 2000;
         var enemyListMeshes = [];
         for (var elm of this.enemyList) enemyListMeshes.push(elm.RobotModel.mesh)
-
+        //console.log(enemyListMeshes)
         var intersections = this.rayCastAim.intersectObjects( enemyListMeshes, true );
         this.rayCastAimHelper.position.copy(this.rayCastAim.ray.origin);
         this.rayCastAimHelper.setDirection(this.rayCastAim.ray.direction);
 
 
         if(intersections.length > 0){
-            this.playerAimAt = intersections[0].object.clone();
+            console.log(intersections)
+            this.playerAimAt = intersections[0].object;
         }
         else this.playerAimAt = null;
         

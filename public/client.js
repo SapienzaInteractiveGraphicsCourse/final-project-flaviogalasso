@@ -4,10 +4,10 @@ import Stats from './jsm/libs/stats.module.js';
 import { OrbitControls } from './jsm/controls/OrbitControls.js';
 
 import {RobotMesh} from './RobotMesh.js';
+import {AlienMesh} from './AlienMesh.js';
 import {MapMesh} from './MapMesh.js';
 import {MapHandler} from './MapHandler.js';
 import { SkyBox } from './SkyBox.js'
-import { PlayerHandler } from './PlayerHandler.js';
 import {GameHandler} from './GameHandler.js';
 
 const canvas = document.querySelector('.web-gl');
@@ -51,6 +51,9 @@ scene.add( axesHelper );
 let Robot3DModel = new RobotMesh();
 await Robot3DModel.loadModel();
 
+let Alien3DModel = new AlienMesh();
+await Alien3DModel.loadModel();
+
 let Map3DModel = new MapMesh();
 await Map3DModel.loadModel();
 
@@ -76,7 +79,7 @@ const controls = new OrbitControls(camera, renderer.domElement);
 
 // Starting Game Handler
 
-const GameEntity = new GameHandler(Robot3DModel,MapEntity,controls,scene)
+const GameEntity = new GameHandler(Robot3DModel,Alien3DModel,MapEntity,controls,scene)
 GameEntity.startIntro();
 
 renderer.domElement.addEventListener("click", function(event){

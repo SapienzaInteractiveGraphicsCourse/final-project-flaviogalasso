@@ -116,6 +116,7 @@ class RobotBox{
         for (var elm of enemyList) this.enemyList.push(elm.RobotModel.mesh);
         for (var elm of environmentList) this.environmentList.push(elm.mesh);
         for (var elm of projectileList) this.projectileList.push(elm.mesh);
+        
     }
 
     setProjectileHandler(ProjectileHandler){
@@ -129,10 +130,18 @@ class RobotBox{
             if ( child instanceof THREE.Mesh ) {
                 child.castShadow = true;
                 child.receiveShadow = true;
+                //child.geometry.computeBoundingBox();
             }
+   
         });
+        /*
+        this.collider = new THREE.Box3()
+        this.colliderHelper = new THREE.Box3Helper( this.collider, 0xff0000 );
+        this.scene.add(this.colliderHelper);
+        */
 
         this.initAnimations();
+
         this.scene.add(this.mesh);
         this.scene.add(this.aimLine);
         this.scene.add(this.rayCastBackHelper);
@@ -166,6 +175,7 @@ class RobotBox{
             this.updateHealth();
             this.updateMovement(commands,clockDelta);
             this.shoot(commands);
+            //this.collider.setFromObject( this.mesh );
         }
 
         updateHealth(){
@@ -261,11 +271,17 @@ class RobotBox{
                 }
                 return;
             }
+            console.log(object,this.name)
             var shootingOrigin = this.shootOffset.clone();
             shootingOrigin.applyQuaternion(this.mesh.quaternion);
             shootingOrigin.add(this.mesh.position);
 
-            var targetOrigin = object.position.clone().add(this.shootTargetOffset);
+            var traversedChild = object;
+            while(traversedChild.name != "Scene"){
+                traversedChild = traversedChild.parent
+            }
+
+            var targetOrigin = traversedChild.position.clone().add(this.shootTargetOffset);
 
             var targetDirection = calculateDirectionBetweenVectors(targetOrigin,shootingOrigin);
 
