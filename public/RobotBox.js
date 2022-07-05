@@ -180,8 +180,9 @@ class RobotBox{
 
         updateHealth(){
             if(this.hasBeenHit && this.health >= 0){
-                console.log(this.name + "has been hit");
-                this.health -= this.hitDamage;
+                console.log(this.name + "has been hit, hp before hit:", this.health);
+                if(this.name == "Player") this.health -= 0.5* this.hitDamage;
+                else this.health -= this.hitDamage;
                 this.hasBeenHit = false;
             }
         }
@@ -271,7 +272,6 @@ class RobotBox{
                 }
                 return;
             }
-            console.log(object,this.name)
             var shootingOrigin = this.shootOffset.clone();
             shootingOrigin.applyQuaternion(this.mesh.quaternion);
             shootingOrigin.add(this.mesh.position);

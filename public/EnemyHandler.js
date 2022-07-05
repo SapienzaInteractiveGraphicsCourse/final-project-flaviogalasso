@@ -16,6 +16,7 @@ class EnemyEntity{
         this.originPosition = position;
         this.RobotModel = new RobotBox(this.scene,   this.RobotMesh, this.originPosition, this.name);
 
+
     }
 
     init(){
@@ -28,7 +29,6 @@ class EnemyEntity{
         for (var property in this.commands) {
             this.commands[property] = false;
           }
-        this.RobotModel = new RobotBox(this.scene, this.RobotMesh, this.originPosition, this.name);
     }
 
     update(PlayerHandler,clockDelta){
@@ -72,13 +72,25 @@ class EnemyHandler{
 
         this.ProjectileHandler = ProjectileHandler;
         this.RobotMesh = RobotMesh;
+
+        this.spawnRadius = 10;
+        this.currentWave = 0;
     }
 
-    spawnEnemy(){
-        var NewEnemy = new EnemyEntity(this.scene,new THREE.Vector3(0,5,0), this.RobotMesh);
+    spawnEnemy(position){
+        var NewEnemy = new EnemyEntity(this.scene,position, this.RobotMesh);
         NewEnemy.init();
         NewEnemy.RobotModel.setProjectileHandler(this.ProjectileHandler);
         this.enemyList.push(NewEnemy);
+    }
+
+    spawnWave(PlayerHandler){
+        console.log("NEW WAVE: ", this.currentWave);
+        var PlayerPosition = PlayerHandler.getPosition();
+        for(var i=0; i < this.currentWave; i++){
+            var enemyPos = new THREE.Vector3(PlayerPosition.x + Math.random() * this.spawnRadius, PlayerPosition.y + 10.0, PlayerPosition.z + Math.random() * this.spawnRadius);
+            this.spawnEnemy(enemyPos);
+        }
     }
 
     updateLists(playerList, environmentList, projectileList){
@@ -96,19 +108,29 @@ class EnemyHandler{
         while (i--) {   
             var Enemy = this.enemyList[i];
             Enemy.update(PlayerHandler,clockDelta);
-            /*
-            if(Proj.mesh.hitSomething){
-                console.log("hit something");
-                Proj.removeFromScene(this.scene);
-                this.projectileList.splice(i, 1);
-                console.log("new projectile list", this.projectileList)
+            if(Enemy.RobotModel.health <= 0){
+                Enemy.reset();
+                this.enemyList.splice(i, 1);
+                console.log("new enemy list", this.enemyList)
             }
-            */
+
+        }
+        if(this.enemyList.length == 0){
+            console.log("ALL ENEMIES CLEARED! NEW WAVE")
+            this.currentWave += 1;
+            this.spawnWave(PlayerHandler);
         }
     }
 
     reset(){
 
+        var i = this.enemyList.length;
+        while (i--) {   
+            var Enemy = this.enemyList[i];
+            Enemy.reset();
+            this.enemyList.splice(i, 1);
+        }
+        this.currentWave = 0;
     }
 
 }

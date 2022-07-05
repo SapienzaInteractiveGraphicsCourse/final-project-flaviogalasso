@@ -52,11 +52,11 @@ class ProjectileHandler{
     }
 
     requestShoot(aimData,name){
-        console.log("shoot!",aimData,name)
+        //console.log("shoot!",aimData,name)
         var NewProj = new Projectile(aimData,name);
         NewProj.addToScene(this.scene);
         this.projectileList.push(NewProj);
-        console.log("new projectile list", this.projectileList)
+        //console.log("new projectile list", this.projectileList)
     }
 
     update(clockDelta){
@@ -65,10 +65,10 @@ class ProjectileHandler{
             var Proj = this.projectileList[i];
             Proj.update(clockDelta);
             if(Proj.mesh.hitSomething){
-                console.log("hit something");
+                //console.log("hit something");
                 Proj.removeFromScene(this.scene);
                 this.projectileList.splice(i, 1);
-                console.log("new projectile list", this.projectileList)
+                //console.log("new projectile list", this.projectileList)
             }
         }
     }
@@ -79,7 +79,7 @@ class ProjectileHandler{
                 var Proj = this.projectileList[i];
                 Proj.removeFromScene(this.scene);
                 this.projectileList.splice(i, 1);
-                console.log("new projectile list", this.projectileList)
+                //console.log("new projectile list", this.projectileList)
             }
         }
 

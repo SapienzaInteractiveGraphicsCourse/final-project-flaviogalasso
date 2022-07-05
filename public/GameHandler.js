@@ -52,6 +52,8 @@ class GameHandler {
         this.PickUpHandler.reset();
         this.EnemyHandler.reset();
         this.scene.remove(this.rayCastAimHelper);
+
+        console.log(this.playerList, this.enemyList, this.projectileList);
     }
 
     startIntro(){
@@ -62,7 +64,6 @@ class GameHandler {
         this.Controls.object.position.set( 0, 20, 5 );
         this.Controls.autoRotate = true;
         this.Controls.target = this.PlayerHandler.getPosition();
-        console.log(this.Controls)
 
     }
 
@@ -107,6 +108,11 @@ class GameHandler {
 
 
         this.ProjectileHandler.update(clockDelta);
+
+        if(this.PlayerHandler.RobotModel.health <= 0){
+            this.resetEntities();
+            this.startIntro();
+        }
     }
 
     updateTPSCamera(clockDelta) {
@@ -153,7 +159,7 @@ class GameHandler {
 
 
         if(intersections.length > 0){
-            console.log(intersections)
+            //console.log(intersections)
             this.playerAimAt = intersections[0].object;
         }
         else this.playerAimAt = null;
