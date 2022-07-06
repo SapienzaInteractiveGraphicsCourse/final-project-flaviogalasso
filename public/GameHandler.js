@@ -21,12 +21,13 @@ class GameHandler {
         this.enemyList = [];
 
         this.ProjectileHandler = new ProjectileHandler(this.projectileList,this.scene);
-        this.PickUpHandler = new PickUpHandler(this.pickupList);
+        this.PickUpHandler = new PickUpHandler(this.pickupList, this.scene);
        
         this.playerPosition = new THREE.Vector3( 0, 5, 0 );
         this.PlayerHandler = new PlayerHandler(this.scene,this.playerPosition,this.RobotMesh);
 
         this.EnemyHandler = new EnemyHandler(this.enemyList, this.ProjectileHandler, this.AlienMesh, this.scene);
+
 
         this.HudHandler = new HudHandler();
         this.difficulty = "Easy";
@@ -114,7 +115,7 @@ class GameHandler {
 
 
 
-        this.PlayerHandler.RobotModel.updateLists(this.enemyList,this.environmentList,this.projectileList);
+        this.PlayerHandler.RobotModel.updateLists(this.enemyList,this.environmentList,this.projectileList,this.pickupList);
         this.PlayerHandler.RobotModel.aimAt(this.playerAimAt,this.mouse);
         this.PlayerHandler.update(clockDelta);
 
@@ -124,6 +125,7 @@ class GameHandler {
 
 
         this.ProjectileHandler.update(clockDelta);
+        this.PickUpHandler.update(this.PlayerHandler,clockDelta);
 
         this.HudHandler.updateInformations(this.PlayerHandler, this.enemyList, this.EnemyHandler.currentWave);
 

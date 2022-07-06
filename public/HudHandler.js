@@ -55,9 +55,9 @@ class HudHandler{
         this.hudBitmap.fillText('Planet Invasion', this.width/2, 40);
         this.hudBitmap.strokeText('Flavio Galasso', this.width/2, 80);
         this.hudBitmap.fillText('Flavio Galasso', this.width/2, 80);
-        this.hudBitmap.fillText('Select 1-2-3 for difficulty:', 300, this.height/2 );
-        this.hudBitmap.fillText('Selected difficulty:'+difficulty, 300, this.height/2 + 40 );
-        this.hudBitmap.fillText('Click mouse to play:', this.width-300, this.height/2 );
+        this.hudBitmap.fillText('Select 1-2-3 for difficulty:', 300, this.height/2 + 160 );
+        this.hudBitmap.fillText('Selected difficulty:'+difficulty, 300, this.height/2 + 160 +40 );
+        this.hudBitmap.fillText('Click mouse to play:', this.width-300, this.height/2 + 160 );
         this.hudTexture.needsUpdate = true;
 
     }
@@ -69,7 +69,7 @@ class HudHandler{
         this.hudBitmap.fillText('Planet Invasion', this.width/2, 40);
    
         this.hudBitmap.fillText("Health:" + PlayerEntity.RobotModel.health, this.width-100, this.height-40);
-        this.hudBitmap.fillText("Ammo:" + PlayerEntity.RobotModel.health, 100, this.height-40);
+        this.hudBitmap.fillText("Ammo:" + PlayerEntity.RobotModel.ammo, 100, this.height-40);
         this.hudBitmap.fillText("Aliens Alive:" +enemyList.length, this.width-200, 40);
         this.hudBitmap.fillText("Current Wave:" +currentWave, this.width-200, 80);
         this.hudTexture.needsUpdate = true;

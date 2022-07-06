@@ -10,6 +10,7 @@ class RobotBox{
         this.enemyList = [];
         this.environmentList = [];
         this.projectileList = [];
+        this.pickupList = [];
         
         this.gltfModel = cloneGltf(RobotMesh.gltfModel);
         this.mesh = this.gltfModel.scene;
@@ -24,11 +25,14 @@ class RobotBox{
         this.jumpVelocity = 0.1;
         this.gravityVelocity = 0.1;
         this.health = 100;
+        this.ammo = 10;
         this.playerHitDamage = 20;
         this.enemyHitDamage = 50;
         this.hasBeenHit = false;
         this.playerDifficultyModifier = 1.0;
         this.enemyDifficultyModifier = 1.0;
+        this.healthIncrement = 20;
+        this.ammoIncrement = 5;
 
 
         this.lerpTime = 10;
@@ -113,13 +117,18 @@ class RobotBox{
         this.thetaShoot =           {ArmShoulderDx:0,       ArmShoulderSx:90,       ArmElboxSx:90,       ArmElboxDx:0,       LegHipDx:90,       LegHipSx:90,     LegKneeDx:0,     LegKneeSx:0, Head:0};
     }
     
-    updateLists(enemyList,environmentList,projectileList){
+    updateLists(enemyList,environmentList,projectileList,pickupList){
         this.enemyList = [];
         this.environmentList = [];
         this.projectileList = [];
+        this.pickupList = [];
         for (var elm of enemyList) this.enemyList.push(elm.RobotModel.mesh);
         for (var elm of environmentList) this.environmentList.push(elm.mesh);
         for (var elm of projectileList) this.projectileList.push(elm.mesh);
+        if(pickupList != null){
+        for (var elm of pickupList) this.pickupList.push(elm.mesh);
+        }
+        
         
     }
 
@@ -209,15 +218,29 @@ class RobotBox{
             }
         }
 
+        updateAmmo(){
+            if(this.name == "Player"){
+                this.ammo -= 1;
+            }
+        }
+
+        applyHealthPickup(){
+            this.health += this.healthIncrement;
+        }
+
+        applyAmmoPickup(){
+            this.ammo += this.ammoIncrement;
+        }
+
         shoot(commands){
-            //console.log(commands.shoot, this.shootAnimationEnded, this.shootAvailable)
-            if(commands.shoot && this.shootAvailable){
+            if(commands.shoot && this.shootAvailable && this.ammo > 0){
                 
                 this.shootAvailable = false;
             }
 
             if( !this.shootAvailable && this.shootAnimationEnded){
                 this.ProjectileHandler.requestShoot(this.aimData,this.name);
+                this.updateAmmo();
                 this.shootAvailable = true;
             }
            
@@ -379,6 +402,26 @@ class RobotBox{
                         projectile_intersections[0].hitSomething=true;
                     } 
                     else this.hasBeenHit = false;
+
+                    // PICKUP CHECK
+                    if(this.name == "Player"){
+                    var pickup_intersections = this.rayCastUpShoot.intersectObjects( this.pickupList, true );
+                    //console.log(projectile_intersections);
+                    if(pickup_intersections.length > 0){
+                        console.log(pickup_intersections)
+                        var pickedupobject = pickup_intersections[0].object;
+                        console.log("PICKED UP SOMETHING:" +  pickedupobject.type);
+                        if(pickedupobject.type == "Health"){
+                            this.applyHealthPickup();
+                        }
+                        if(pickedupobject.type == "Ammo"){
+                            this.applyAmmoPickup();
+                        }
+                        pickedupobject.pickedUp=true;
+                    } 
+                }
+
+
                     
 
 
