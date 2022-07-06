@@ -80,6 +80,8 @@ class GameHandler {
 
         this.HudHandler.introductionScene();
 
+        this.EnemyHandler.spawnEnemy(this.PlayerHandler.getPosition().multiplyScalar(4));
+
     }
 
     startGame(){

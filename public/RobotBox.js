@@ -107,7 +107,37 @@ class RobotBox{
         this.shootAvailable = true;
         this.shootAnimationEnded = false;
 
-        this.thetaIdle =           {ArmShoulderDx:90,       ArmShoulderSx:90,       ArmElboxSx:90,       ArmElboxDx:90,       LegHipDx:90,       LegHipSx:90,     LegKneeDx:0,     LegKneeSx:0, Head:0};
+        if(this.name == "Enemy"){
+
+            this.defaultTheta = {
+                mixamorigHead:this.mesh.getObjectByName("mixamorigHead").rotation.y,
+                mixamorigLeftArm:this.mesh.getObjectByName("mixamorigLeftArm").rotation.z
+            }
+
+            this.currentTheta = {
+                mixamorigHead:this.defaultTheta.mixamorigHead,
+                mixamorigLeftArm:this.defaultTheta.mixamorigLeftArm
+                };
+
+            
+            this.thetaIdle =  {
+                mixamorigHead:this.defaultTheta.mixamorigHead,
+                mixamorigLeftArm:this.defaultTheta.mixamorigLeftArm,
+            };
+
+
+            this.thetaShoot = {  
+                mixamorigLeftArm:90}
+
+            this.thetaWalkingLegSpread = {ArmShoulderDx:45,       ArmShoulderSx:180-45,   ArmElboxSx:90,       ArmElboxDx:90,     LegHipDx:90+10,       LegHipSx:90-20,      LegKneeDx:0,     LegKneeSx:-20, Head:0};
+            this.thetaWalkingLegSpreadRev= {ArmShoulderDx:180-45,   ArmShoulderSx:45,       ArmElboxSx:90,       ArmElboxDx:90,   LegHipDx:90-20,       LegHipSx:90+20,    LegKneeDx:-20,     LegKneeSx:0, Head:0};
+            this.thetaIdleRotation =           {ArmShoulderDx:90,       ArmShoulderSx:90,       ArmElboxSx:90,       ArmElboxDx:90,       LegHipDx:90,       LegHipSx:90,     LegKneeDx:0,     LegKneeSx:0,  Head:90};
+            this.thetaIdleRotation2 =           {ArmShoulderDx:90,       ArmShoulderSx:90,       ArmElboxSx:90,       ArmElboxDx:90,       LegHipDx:90,       LegHipSx:90,     LegKneeDx:0,     LegKneeSx:0, Head:-90};
+            this.thetaJumpUp =           {ArmShoulderDx:-90,       ArmShoulderSx:-90,       ArmElboxSx:0,       ArmElboxDx:0,       LegHipDx:90,       LegHipSx:90,     LegKneeDx:0,     LegKneeSx:0, Head:0};
+          
+        }
+        else{
+        this.thetaIdle = {};
         this.thetaWalkingLegSpread = {ArmShoulderDx:45,       ArmShoulderSx:180-45,   ArmElboxSx:90,       ArmElboxDx:90,     LegHipDx:90+10,       LegHipSx:90-20,      LegKneeDx:0,     LegKneeSx:-20, Head:0};
         this.thetaWalkingLegSpreadRev= {ArmShoulderDx:180-45,   ArmShoulderSx:45,       ArmElboxSx:90,       ArmElboxDx:90,   LegHipDx:90-20,       LegHipSx:90+20,    LegKneeDx:-20,     LegKneeSx:0, Head:0};
         this.thetaIdleRotation =           {ArmShoulderDx:90,       ArmShoulderSx:90,       ArmElboxSx:90,       ArmElboxDx:90,       LegHipDx:90,       LegHipSx:90,     LegKneeDx:0,     LegKneeSx:0,  Head:90};
@@ -115,6 +145,7 @@ class RobotBox{
         this.thetaJumpUp =           {ArmShoulderDx:-90,       ArmShoulderSx:-90,       ArmElboxSx:0,       ArmElboxDx:0,       LegHipDx:90,       LegHipSx:90,     LegKneeDx:0,     LegKneeSx:0, Head:0};
         this.currentTheta =        {ArmShoulderDx:0,        ArmShoulderSx:0,        ArmElboxSx:0,        ArmElboxDx:0,        LegHipDx:0,        LegHipSx:0,      LegKneeDx:0,     LegKneeSx:0, Head:0};
         this.thetaShoot =           {ArmShoulderDx:0,       ArmShoulderSx:90,       ArmElboxSx:90,       ArmElboxDx:0,       LegHipDx:90,       LegHipSx:90,     LegKneeDx:0,     LegKneeSx:0, Head:0};
+        }
     }
     
     updateLists(enemyList,environmentList,projectileList,pickupList){
@@ -611,6 +642,11 @@ class RobotBox{
                     this.shootTween.stop();
                 }
             break;
+
+        }
+        if(this.name == "Enemy"){
+            this.mesh.getObjectByName("mixamorigHead").rotation.y = this.currentTheta.mixamorigHead * Math.PI / 180.0;
+            this.mesh.getObjectByName("mixamorigLeftArm").rotation.z = this.currentTheta.mixamorigLeftArm * Math.PI / 180.0;
 
         }
         /*
