@@ -35,6 +35,8 @@ class PlayerHandler{
         this.RobotModel = new RobotBox(this.scene, this.RobotMesh, this.originPosition, this.name);
     }
 
+
+
     update(clockDelta){
         this.RobotModel.update(this.commands,clockDelta);
     }

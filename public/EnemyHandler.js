@@ -17,6 +17,8 @@ class EnemyEntity{
         this.RobotModel = new RobotBox(this.scene,   this.RobotMesh, this.originPosition, this.name);
 
 
+
+
     }
 
     init(){
@@ -50,7 +52,10 @@ class EnemyEntity{
             if(Math.random() > 0.995){
                 this.commands.shoot = true;
             }
-            //this.commands.forward = true;
+            if(result.distanceToTarget > 10){
+                this.commands.forward = true;
+            }
+            
         }
     }
 
@@ -75,12 +80,14 @@ class EnemyHandler{
 
         this.spawnRadius = 10;
         this.currentWave = 0;
+        this.difficulty = "Easy";
     }
 
     spawnEnemy(position){
         var NewEnemy = new EnemyEntity(this.scene,position, this.RobotMesh);
         NewEnemy.init();
         NewEnemy.RobotModel.setProjectileHandler(this.ProjectileHandler);
+        NewEnemy.RobotModel.setDifficulty(this.difficulty);
         this.enemyList.push(NewEnemy);
     }
 
@@ -90,6 +97,7 @@ class EnemyHandler{
         for(var i=0; i < this.currentWave; i++){
             var enemyPos = new THREE.Vector3(PlayerPosition.x + Math.random() * this.spawnRadius, PlayerPosition.y + 10.0, PlayerPosition.z + Math.random() * this.spawnRadius);
             this.spawnEnemy(enemyPos);
+
         }
     }
 
@@ -99,6 +107,10 @@ class EnemyHandler{
             var Enemy = this.enemyList[i];
             Enemy.RobotModel.updateLists(playerList,environmentList,projectileList);
         }
+    }
+
+    setDifficulty(difficulty){
+        this.difficulty = difficulty;
     }
 
 
@@ -128,7 +140,7 @@ class EnemyHandler{
         while (i--) {   
             var Enemy = this.enemyList[i];
             Enemy.reset();
-            
+
             this.enemyList.splice(i, 1);
         }
         this.currentWave = 0;

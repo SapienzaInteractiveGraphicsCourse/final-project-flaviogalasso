@@ -24,8 +24,12 @@ class RobotBox{
         this.jumpVelocity = 0.1;
         this.gravityVelocity = 0.1;
         this.health = 100;
-        this.hitDamage = 50;
+        this.playerHitDamage = 20;
+        this.enemyHitDamage = 50;
         this.hasBeenHit = false;
+        this.playerDifficultyModifier = 1.0;
+        this.enemyDifficultyModifier = 1.0;
+
 
         this.lerpTime = 10;
         this.idealRotationAngle =  new THREE.Vector3();
@@ -122,6 +126,8 @@ class RobotBox{
     setProjectileHandler(ProjectileHandler){
         this.ProjectileHandler = ProjectileHandler;
     }
+
+ 
   
     spawn(){
         this.mesh.scale.set(1, 1, 1);
@@ -178,11 +184,27 @@ class RobotBox{
             //this.collider.setFromObject( this.mesh );
         }
 
+        setDifficulty(difficulty){
+            if(difficulty == "Easy"){
+                this.playerDifficultyModifier = 0.1;
+                this.enemyDifficultyModifier = 2.0;
+            }
+            else if(difficulty == "Medium"){
+                this.playerDifficultyModifier = 0.3;
+                this.enemyDifficultyModifier = 1.0;
+            }
+            else if(difficulty == "Hard"){
+                this.playerDifficultyModifier = 2.0;
+                this.enemyDifficultyModifier = 1.0;
+            }
+        }
+
         updateHealth(){
             if(this.hasBeenHit && this.health >= 0){
                 console.log(this.name + "has been hit, hp before hit:", this.health);
-                if(this.name == "Player") this.health -= 0.5* this.hitDamage;
-                else this.health -= this.hitDamage;
+                if(this.name == "Player") this.health -= this.playerHitDamage * this.playerDifficultyModifier;
+                else this.health -= this.enemyHitDamage * this.enemyDifficultyModifier;
+                console.log(this.name + "has been hit, hp after hit:", this.health);
                 this.hasBeenHit = false;
             }
         }

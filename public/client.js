@@ -96,6 +96,7 @@ const render = ()=>{
     renderer.render(scene, camera);
 }
 
+
 // Recursion function for animation
 const animate = ()=>{
     var clockDelta = clock.getDelta();
@@ -103,6 +104,7 @@ const animate = ()=>{
     TWEEN.update();
     GameEntity.update(clockDelta);
     render();
+    GameEntity.HudHandler.renderHUD(renderer);
     stats.update();
 }
 animate();
@@ -113,6 +115,7 @@ const windowResize = ()=>{
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    GameEntity.HudHandler.reloadDimensions(window.innerWidth, window.innerHeight);
     render();
 }
 

@@ -3,6 +3,7 @@ import {ProjectileHandler} from './ProjectileHandler.js'
 import {PickUpHandler} from './PickUpHandler.js'
 import {EnemyHandler} from './EnemyHandler.js'
 import {PlayerHandler} from './PlayerHandler.js'
+import {HudHandler} from './HudHandler.js'
 
 class GameHandler {
     constructor(RobotMesh,AlienMesh,MapEntity,Controls,scene){
@@ -27,6 +28,9 @@ class GameHandler {
 
         this.EnemyHandler = new EnemyHandler(this.enemyList, this.ProjectileHandler, this.AlienMesh, this.scene);
 
+        this.HudHandler = new HudHandler();
+        this.difficulty = "Easy";
+
 
         this.cameraLookAt = new THREE.Vector3(0,4,10);
         this.cameraOffset = new THREE.Vector3(-3,7,-10);
@@ -44,6 +48,7 @@ class GameHandler {
             pointVector3D: new THREE.Vector3()};
 
         document.addEventListener("mousemove", (e) => this.mouseMoveEvent(e), false);
+        document.addEventListener('keyup', (e) => this.keyUpEvent(e),false);
     }
 
     resetEntities(){
@@ -54,6 +59,7 @@ class GameHandler {
         this.scene.remove(this.rayCastAimHelper);
 
         console.log(this.playerList, this.enemyList, this.projectileList);
+
     }
 
     startIntro(){
@@ -65,6 +71,8 @@ class GameHandler {
         this.Controls.autoRotate = true;
         this.Controls.target = this.PlayerHandler.getPosition();
 
+        this.HudHandler.introductionScene();
+
     }
 
     startGame(){
@@ -75,7 +83,9 @@ class GameHandler {
         this.PlayerHandler.RobotModel.setProjectileHandler(this.ProjectileHandler);
         this.gameState = "Game";
         this.Controls.autoRotate = false;
-        this.EnemyHandler.spawnEnemy();
+
+        this.PlayerHandler.RobotModel.setDifficulty(this.difficulty);
+        this.EnemyHandler.setDifficulty(this.difficulty);
     }
 
     update(clockDelta){
@@ -84,8 +94,14 @@ class GameHandler {
             this.updateGame(clockDelta);
         }
         else if(this.gameState == "Intro"){
-            this.Controls.update();
+            this.updateIntro(clockDelta);
         }
+        
+    }
+
+    updateIntro(clockDelta){
+        this.Controls.update();
+        this.HudHandler.introductionScene(this.difficulty);
         
     }
 
@@ -108,6 +124,9 @@ class GameHandler {
 
 
         this.ProjectileHandler.update(clockDelta);
+
+        this.HudHandler.updateInformations(this.PlayerHandler, this.enemyList, this.EnemyHandler.currentWave);
+
 
         if(this.PlayerHandler.RobotModel.health <= 0){
             this.resetEntities();
@@ -177,7 +196,20 @@ class GameHandler {
         this.mouse.pointVector2D.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
     }
 
-    spawnProjectile(){
+    keyUpEvent(event){
+        if(this.gameState == "Intro"){
+        switch (event.keyCode){
+            case 49: //w
+            this.difficulty = "Easy";
+            break;
+            case 50: //a
+            this.difficulty = "Medium";
+            break;
+            case 51: //s
+            this.difficulty = "Hard";
+            break;
+        }
+        }
 
     }
 
