@@ -128,6 +128,7 @@ class EnemyHandler{
         while (i--) {   
             var Enemy = this.enemyList[i];
             Enemy.reset();
+            
             this.enemyList.splice(i, 1);
         }
         this.currentWave = 0;
