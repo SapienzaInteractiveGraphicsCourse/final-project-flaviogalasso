@@ -5,6 +5,8 @@ import { OrbitControls } from './jsm/controls/OrbitControls.js';
 
 import {RobotMesh} from './RobotMesh.js';
 import {AlienMesh} from './AlienMesh.js';
+import {UfoMesh} from './UfoMesh.js';
+
 import {MapMesh} from './MapMesh.js';
 import {MapHandler} from './MapHandler.js';
 import { SkyBox } from './SkyBox.js'
@@ -54,6 +56,9 @@ await Robot3DModel.loadModel();
 let Alien3DModel = new AlienMesh();
 await Alien3DModel.loadModel();
 
+let Ufo3DModel = new UfoMesh();
+await Ufo3DModel.loadModel();
+
 let Map3DModel = new MapMesh();
 await Map3DModel.loadModel();
 
@@ -79,7 +84,7 @@ const controls = new OrbitControls(camera, renderer.domElement);
 
 // Starting Game Handler
 
-const GameEntity = new GameHandler(Robot3DModel,Alien3DModel,MapEntity,controls,scene)
+const GameEntity = new GameHandler(Robot3DModel,Alien3DModel,Ufo3DModel,MapEntity,controls,scene)
 GameEntity.startIntro();
 
 renderer.domElement.addEventListener("click", function(event){

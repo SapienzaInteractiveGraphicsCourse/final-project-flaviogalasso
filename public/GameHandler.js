@@ -4,14 +4,16 @@ import {PickUpHandler} from './PickUpHandler.js'
 import {EnemyHandler} from './EnemyHandler.js'
 import {PlayerHandler} from './PlayerHandler.js'
 import {HudHandler} from './HudHandler.js'
+import {UfoSpawner} from './UfoSpawner.js'
 
 class GameHandler {
-    constructor(RobotMesh,AlienMesh,MapEntity,Controls,scene){
+    constructor(RobotMesh,AlienMesh,UfoMesh,MapEntity,Controls,scene){
         this.gameState = "Setup";
         this.scene = scene;
         this.MapEntity = MapEntity;
         this.RobotMesh = RobotMesh;
         this.AlienMesh = AlienMesh;
+        this.UfoMesh = UfoMesh;
 
         this.Controls = Controls;
         this.playerList = [];
@@ -26,7 +28,8 @@ class GameHandler {
         this.playerPosition = new THREE.Vector3( 0, 5, 0 );
         this.PlayerHandler = new PlayerHandler(this.scene,this.playerPosition,this.RobotMesh);
 
-        this.EnemyHandler = new EnemyHandler(this.enemyList, this.ProjectileHandler, this.AlienMesh, this.scene);
+        this.EnemyHandler = new EnemyHandler(this.enemyList, this.ProjectileHandler, this.AlienMesh, this.UfoMesh,this.scene);
+        this.UfoSpawner = new UfoSpawner(this.UfoMesh,this.scene);
 
 
         this.HudHandler = new HudHandler();
@@ -57,6 +60,7 @@ class GameHandler {
         this.ProjectileHandler.reset();
         this.PickUpHandler.reset();
         this.EnemyHandler.reset();
+        this.UfoSpawner.reset();
         this.scene.remove(this.rayCastAimHelper);
 
         console.log(this.playerList, this.enemyList, this.projectileList);
@@ -68,9 +72,11 @@ class GameHandler {
         this.PlayerHandler.init();
         this.MapEntity.spawnMap();
         this.gameState = "Intro";
-        this.Controls.object.position.set( 0, 20, 5 );
+        //this.Controls.object.position.set( 0, 20, 5 );
+        this.Controls.object.position.set( 0, 40, 30 );
         this.Controls.autoRotate = true;
         this.Controls.target = this.PlayerHandler.getPosition();
+        this.UfoSpawner.spawnUfo(this.PlayerHandler.getPosition());
 
         this.HudHandler.introductionScene();
 
@@ -87,9 +93,12 @@ class GameHandler {
 
         this.PlayerHandler.RobotModel.setDifficulty(this.difficulty);
         this.EnemyHandler.setDifficulty(this.difficulty);
+
+        this.UfoSpawner.spawnUfo(this.PlayerHandler.getPosition());
     }
 
     update(clockDelta){
+        this.UfoSpawner.update(clockDelta);
 
         if(this.gameState == "Game"){
             this.updateGame(clockDelta);

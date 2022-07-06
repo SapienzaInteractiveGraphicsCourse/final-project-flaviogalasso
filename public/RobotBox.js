@@ -25,14 +25,14 @@ class RobotBox{
         this.jumpVelocity = 0.1;
         this.gravityVelocity = 0.1;
         this.health = 100;
-        this.ammo = 10;
+        this.ammo = 50;
         this.playerHitDamage = 20;
         this.enemyHitDamage = 50;
         this.hasBeenHit = false;
         this.playerDifficultyModifier = 1.0;
         this.enemyDifficultyModifier = 1.0;
         this.healthIncrement = 20;
-        this.ammoIncrement = 5;
+        this.ammoIncrement = 20;
 
 
         this.lerpTime = 10;
