@@ -109,122 +109,128 @@ class RobotBox{
 
         if(this.name == "Enemy"){
 
-
-
             this.idleTheta = {
-                mixamorigHead:0,
-                mixamorigLeftShoulderX:0,
-                mixamorigLeftShoulderY:0,
-                mixamorigLeftShoulderZ:0,
-                mixamorigRightShoulderX:0,
-                mixamorigRightShoulderY:0,
-                mixamorigRightShoulderZ:0,
+                Head:0,
 
-                mixamorigLeftArmX:0.2,
-                mixamorigLeftArmY:0.0,
-                mixamorigLeftArmZ:0.0,
-                mixamorigRightArmX:0.2,
-                mixamorigRightArmY:0.0,
-                mixamorigRightArmZ:0.0, 
+                // Left Arm
+                LeftArmX:0,
+                LeftArmY:0,
+                LeftArmZ:0,
 
-                mixamorigLeftForeArmZ: 0,
-                mixamorigRightForeArmZ: 0,
+                // Right Arm
+                RightArmX:0,
+                RightArmY:0,
+                RightArmZ:0,
 
-                mixamorigLeftUpLegY: 0,
-                mixamorigRightUpLegY:0,
+                //Left Upper Leg
+                LeftUpLegX: 0,
+                LeftUpLegY: 0,
+                LeftUpLegZ: 3.14,
 
-                mixamorigLeftFootX: 0,
+                //Right Upper Leg
+                RightUpLegX: 0,
+                RightUpLegY: 0,
+                RightUpLegZ: 3.14,
 
-                mixamorigSpineX: 0,
+                //Body
+                SpineX: 0,
 
-                mixamorigLeftLegX: 0,
-                mixamorigLeftLegY: 0,
-                mixamorigLeftLegZ: 0,
-                mixamorigRightLegX: 0,
-                mixamorigRightLegY: 0,
-                mixamorigRightLegZ: 0,
+                //Left Leg
+                LeftLegX: 0,
+                LeftLegY: 0,
+                LeftLegZ: 0,
+
+                //Right Leg
+                RightLegX: 0,
+                RightLegY: 0,
+                RightLegZ: 0,
             };
 
             this.currentTheta = {
-                mixamorigHead:0,
-                mixamorigLeftShoulderX:0,
-                mixamorigLeftShoulderY:0,
-                mixamorigLeftShoulderZ:0,
+                Head:0,
 
-                mixamorigRightShoulderX:0,
-                mixamorigRightShoulderY:0,
-                mixamorigRightShoulderZ:0,
+                // Left Arm
+                LeftArmX:0,
+                LeftArmY:0,
+                LeftArmZ:0,
 
-                mixamorigLeftArmX:0,
-                mixamorigLeftArmY:0,
-                mixamorigLeftArmZ:0,
-                mixamorigRightArmX:0,
-                mixamorigRightArmY:0,
-                mixamorigRightArmZ:0,
+                // Right Arm
+                RightArmX:0,
+                RightArmY:0,
+                RightArmZ:0,
 
-                mixamorigLeftForeArmZ: 0,
-                mixamorigRightForeArmZ: 0,
+                //Left Upper Leg
+                LeftUpLegX: 0,
+                LeftUpLegY: 0,
+                LeftUpLegZ: 0,
 
-                mixamorigLeftUpLegY: 0,
-                mixamorigRightUpLegY:0,
-                mixamorigLeftFootX: 0,
-                mixamorigSpineX: 0,
-                mixamorigLeftLegX: 0,
-                mixamorigLeftLegY: 0,
-                mixamorigLeftLegZ: 0,
-                mixamorigRightLegX: 0,
-                mixamorigRightLegY: 0,
-                mixamorigRightLegZ: 0,
+                //Right Upper Leg
+                RightUpLegX: 0,
+                RightUpLegY: 0,
+                RightUpLegZ: 0,
 
+                //Body
+                SpineX: 0,
+
+                //Left Leg
+                LeftLegX: 0,
+                LeftLegY: 0,
+                LeftLegZ: 0,
+
+                //Right Leg
+                RightLegX: 0,
+                RightLegY: 0,
+                RightLegZ: 0,
                 };
 
             this.shootTheta = {
-                mixamorigLeftForeArmZ: 0.7,
-                mixamorigRightForeArmZ: 0,
+                LeftArmZ: 1.2
                 };
             
             this.walkThetaStage1 = {
-                mixamorigLeftForeArmZ: 0.2,
-                mixamorigRightForeArmZ: 0.2,
+                SpineX: 0.513,
+                LeftArmZ: 0.2,
+                RightArmZ: 0.2,
 
-                mixamorigLeftUpLegY: 0.2,
-                mixamorigRightUpLegY: 0,
+                LeftUpLegX: -0.341,
+                LeftUpLegY: -0.8267,
+                LeftUpLegZ: 3.14,
 
-                mixamorigSpineX: 0.2,
+                LeftLegX: -0.549,
+                LeftLegY: 0,
+                LeftLegZ: -0.688,
 
-                //mixamorigLeftFootX: -0.123,
+                RightUpLegX: 0.341,
+                RightUpLegY: 0.8267,
+                RightUpLegZ: 3.14,
 
-                mixamorigLeftLegX: 0,
-                mixamorigLeftLegY: 0.4,
-                mixamorigLeftLegZ: 0,
+                RightLegX: -0.549,
+                RightLegY: 0,
+                RightLegZ: 0.688,
 
-                /*
-                mixamorigRightLegX: 0,
-                mixamorigRightLegY: 0,
-                mixamorigRightLegZ: 0,
-                */
 
-          
-                
 
             }
 
             this.walkThetaStage2 = {
-                mixamorigLeftForeArmZ: -0.2,
-                mixamorigRightForeArmZ: -0.2,
+                LeftArmZ: -0.2,
+                RightArmZ: -0.2,
 
-                mixamorigRightUpLegY: -0.2,
-                mixamorigLeftUpLegY:0,
-                      
-                mixamorigRightLegX: 0,
-                mixamorigRightLegY: -0.4,
-                mixamorigRightLegZ: 0,
+                LeftUpLegX: 0.341,
+                LeftUpLegY: -0.8267,
+                LeftUpLegZ: 3.14,
 
-                /*
-                mixamorigLeftLegX: 0,
-                mixamorigLeftLegY: 0,
-                mixamorigLeftLegZ: 0,
-                */
+                LeftLegX: 0,
+                LeftLegY: 0,
+                LeftLegZ: 0,
+
+                RightUpLegX: -0.341,
+                RightUpLegY: 0.8267,
+                RightUpLegZ: 3.14,
+
+                RightLegX: -0.549,
+                RightLegY: 0,
+                RightLegZ: 0.688
             }
         }
 
@@ -697,16 +703,15 @@ class RobotBox{
             //this.mesh.getObjectByName("mixamorigHead").quaternion.set(0,this.currentTheta.mixamorigHead,0,1);
             //this.mesh.getObjectByName("mixamorigLeftShoulder").quaternion.set(this.currentTheta.mixamorigLeftShoulderX,this.currentTheta.mixamorigLeftShoulderY,this.currentTheta.mixamorigLeftShoulderZ,1);
             //this.mesh.getObjectByName("mixamorigRightShoulder").quaternion.set(this.currentTheta.mixamorigRightShoulderX,this.currentTheta.mixamorigRightShoulderY,this.currentTheta.mixamorigRightShoulderZ,1);
-            this.mesh.getObjectByName("mixamorigLeftArm").quaternion.set(this.currentTheta.mixamorigLeftArmX,this.currentTheta.mixamorigLeftArmY,this.currentTheta.mixamorigLeftArmZ,1);
-            this.mesh.getObjectByName("mixamorigRightArm").quaternion.set(this.currentTheta.mixamorigRightArmX,this.currentTheta.mixamorigRightArmY,this.currentTheta.mixamorigRightArmZ,1);
-            this.mesh.getObjectByName("mixamorigLeftForeArm").quaternion.set(0,0,this.currentTheta.mixamorigLeftForeArmZ,1);
-            this.mesh.getObjectByName("mixamorigRightForeArm").quaternion.set(0,0,this.currentTheta.mixamorigRightForeArmZ,1);
-            this.mesh.getObjectByName("mixamorigSpine").quaternion.set(this.currentTheta.mixamorigSpineX,0,0,1);
-            this.mesh.getObjectByName("mixamorigLeftUpLeg").quaternion.y = this.currentTheta.mixamorigLeftUpLegY;
-            this.mesh.getObjectByName("mixamorigLeftLeg").quaternion.set(this.currentTheta.mixamorigLeftLegX, this.currentTheta.mixamorigLeftLegY,this.currentTheta.mixamorigLeftLegZ,1)
-            this.mesh.getObjectByName("mixamorigRightUpLeg").quaternion.y = this.currentTheta.mixamorigRightUpLegY;
-            this.mesh.getObjectByName("mixamorigRightLeg").quaternion.set(this.currentTheta.mixamorigRightLegX, this.currentTheta.mixamorigRightLegY,this.currentTheta.mixamorigRightLegZ,1)
-
+            this.mesh.getObjectByName("mixamorigSpine").rotation.x = this.currentTheta.SpineX;
+            this.mesh.getObjectByName("mixamorigLeftArm").rotation.set(this.currentTheta.LeftArmX,this.currentTheta.LeftArmY,this.currentTheta.LeftArmZ );
+            this.mesh.getObjectByName("mixamorigLeftUpLeg").rotation.set(this.currentTheta.LeftUpLegX,this.currentTheta.LeftUpLegY,this.currentTheta.LeftUpLegZ );
+            this.mesh.getObjectByName("mixamorigLeftLeg").rotation.set(this.currentTheta.LeftLegX,this.currentTheta.LeftLegY,this.currentTheta.LeftLegZ );
+           
+            this.mesh.getObjectByName("mixamorigRightArm").rotation.set(this.currentTheta.RightArmX,this.currentTheta.RightArmY,this.currentTheta.RightArmZ );
+            this.mesh.getObjectByName("mixamorigRightUpLeg").rotation.set(this.currentTheta.RightUpLegX,this.currentTheta.RightUpLegY,this.currentTheta.RightUpLegZ );
+            this.mesh.getObjectByName("mixamorigRightLeg").rotation.set(this.currentTheta.RightLegX,this.currentTheta.RightLegY,this.currentTheta.RightLegZ );
+            
           
             console.log(this.currentTheta)
             //console.log(this.mesh)
