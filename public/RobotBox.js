@@ -109,43 +109,125 @@ class RobotBox{
 
         if(this.name == "Enemy"){
 
-            this.defaultTheta = {
-                mixamorigHead:this.mesh.getObjectByName("mixamorigHead").rotation.y,
-                mixamorigLeftArm:this.mesh.getObjectByName("mixamorigLeftArm").rotation.z
-            }
 
-            this.currentTheta = {
-                mixamorigHead:this.defaultTheta.mixamorigHead,
-                mixamorigLeftArm:this.defaultTheta.mixamorigLeftArm
-                };
 
-            
-            this.thetaIdle =  {
-                mixamorigHead:this.defaultTheta.mixamorigHead,
-                mixamorigLeftArm:this.defaultTheta.mixamorigLeftArm,
+            this.idleTheta = {
+                mixamorigHead:0,
+                mixamorigLeftShoulderX:0,
+                mixamorigLeftShoulderY:0,
+                mixamorigLeftShoulderZ:0,
+                mixamorigRightShoulderX:0,
+                mixamorigRightShoulderY:0,
+                mixamorigRightShoulderZ:0,
+
+                mixamorigLeftArmX:0.2,
+                mixamorigLeftArmY:0.0,
+                mixamorigLeftArmZ:0.0,
+                mixamorigRightArmX:0.2,
+                mixamorigRightArmY:0.0,
+                mixamorigRightArmZ:0.0, 
+
+                mixamorigLeftForeArmZ: 0,
+                mixamorigRightForeArmZ: 0,
+
+                mixamorigLeftUpLegY: 0,
+                mixamorigRightUpLegY:0,
+
+                mixamorigLeftFootX: 0,
+
+                mixamorigSpineX: 0,
+
+                mixamorigLeftLegX: 0,
+                mixamorigLeftLegY: 0,
+                mixamorigLeftLegZ: 0,
+                mixamorigRightLegX: 0,
+                mixamorigRightLegY: 0,
+                mixamorigRightLegZ: 0,
             };
 
+            this.currentTheta = {
+                mixamorigHead:0,
+                mixamorigLeftShoulderX:0,
+                mixamorigLeftShoulderY:0,
+                mixamorigLeftShoulderZ:0,
 
-            this.thetaShoot = {  
-                mixamorigLeftArm:90}
+                mixamorigRightShoulderX:0,
+                mixamorigRightShoulderY:0,
+                mixamorigRightShoulderZ:0,
 
-            this.thetaWalkingLegSpread = {ArmShoulderDx:45,       ArmShoulderSx:180-45,   ArmElboxSx:90,       ArmElboxDx:90,     LegHipDx:90+10,       LegHipSx:90-20,      LegKneeDx:0,     LegKneeSx:-20, Head:0};
-            this.thetaWalkingLegSpreadRev= {ArmShoulderDx:180-45,   ArmShoulderSx:45,       ArmElboxSx:90,       ArmElboxDx:90,   LegHipDx:90-20,       LegHipSx:90+20,    LegKneeDx:-20,     LegKneeSx:0, Head:0};
-            this.thetaIdleRotation =           {ArmShoulderDx:90,       ArmShoulderSx:90,       ArmElboxSx:90,       ArmElboxDx:90,       LegHipDx:90,       LegHipSx:90,     LegKneeDx:0,     LegKneeSx:0,  Head:90};
-            this.thetaIdleRotation2 =           {ArmShoulderDx:90,       ArmShoulderSx:90,       ArmElboxSx:90,       ArmElboxDx:90,       LegHipDx:90,       LegHipSx:90,     LegKneeDx:0,     LegKneeSx:0, Head:-90};
-            this.thetaJumpUp =           {ArmShoulderDx:-90,       ArmShoulderSx:-90,       ArmElboxSx:0,       ArmElboxDx:0,       LegHipDx:90,       LegHipSx:90,     LegKneeDx:0,     LegKneeSx:0, Head:0};
+                mixamorigLeftArmX:0,
+                mixamorigLeftArmY:0,
+                mixamorigLeftArmZ:0,
+                mixamorigRightArmX:0,
+                mixamorigRightArmY:0,
+                mixamorigRightArmZ:0,
+
+                mixamorigLeftForeArmZ: 0,
+                mixamorigRightForeArmZ: 0,
+
+                mixamorigLeftUpLegY: 0,
+                mixamorigRightUpLegY:0,
+                mixamorigLeftFootX: 0,
+                mixamorigSpineX: 0,
+                mixamorigLeftLegX: 0,
+                mixamorigLeftLegY: 0,
+                mixamorigLeftLegZ: 0,
+                mixamorigRightLegX: 0,
+                mixamorigRightLegY: 0,
+                mixamorigRightLegZ: 0,
+
+                };
+
+            this.shootTheta = {
+                mixamorigLeftForeArmZ: 0.7,
+                mixamorigRightForeArmZ: 0,
+                };
+            
+            this.walkThetaStage1 = {
+                mixamorigLeftForeArmZ: 0.2,
+                mixamorigRightForeArmZ: 0.2,
+
+                mixamorigLeftUpLegY: 0.2,
+                mixamorigRightUpLegY: 0,
+
+                mixamorigSpineX: 0.2,
+
+                //mixamorigLeftFootX: -0.123,
+
+                mixamorigLeftLegX: 0,
+                mixamorigLeftLegY: 0.4,
+                mixamorigLeftLegZ: 0,
+
+                /*
+                mixamorigRightLegX: 0,
+                mixamorigRightLegY: 0,
+                mixamorigRightLegZ: 0,
+                */
+
           
+                
+
+            }
+
+            this.walkThetaStage2 = {
+                mixamorigLeftForeArmZ: -0.2,
+                mixamorigRightForeArmZ: -0.2,
+
+                mixamorigRightUpLegY: -0.2,
+                mixamorigLeftUpLegY:0,
+                      
+                mixamorigRightLegX: 0,
+                mixamorigRightLegY: -0.4,
+                mixamorigRightLegZ: 0,
+
+                /*
+                mixamorigLeftLegX: 0,
+                mixamorigLeftLegY: 0,
+                mixamorigLeftLegZ: 0,
+                */
+            }
         }
-        else{
-        this.thetaIdle = {};
-        this.thetaWalkingLegSpread = {ArmShoulderDx:45,       ArmShoulderSx:180-45,   ArmElboxSx:90,       ArmElboxDx:90,     LegHipDx:90+10,       LegHipSx:90-20,      LegKneeDx:0,     LegKneeSx:-20, Head:0};
-        this.thetaWalkingLegSpreadRev= {ArmShoulderDx:180-45,   ArmShoulderSx:45,       ArmElboxSx:90,       ArmElboxDx:90,   LegHipDx:90-20,       LegHipSx:90+20,    LegKneeDx:-20,     LegKneeSx:0, Head:0};
-        this.thetaIdleRotation =           {ArmShoulderDx:90,       ArmShoulderSx:90,       ArmElboxSx:90,       ArmElboxDx:90,       LegHipDx:90,       LegHipSx:90,     LegKneeDx:0,     LegKneeSx:0,  Head:90};
-        this.thetaIdleRotation2 =           {ArmShoulderDx:90,       ArmShoulderSx:90,       ArmElboxSx:90,       ArmElboxDx:90,       LegHipDx:90,       LegHipSx:90,     LegKneeDx:0,     LegKneeSx:0, Head:-90};
-        this.thetaJumpUp =           {ArmShoulderDx:-90,       ArmShoulderSx:-90,       ArmElboxSx:0,       ArmElboxDx:0,       LegHipDx:90,       LegHipSx:90,     LegKneeDx:0,     LegKneeSx:0, Head:0};
-        this.currentTheta =        {ArmShoulderDx:0,        ArmShoulderSx:0,        ArmElboxSx:0,        ArmElboxDx:0,        LegHipDx:0,        LegHipSx:0,      LegKneeDx:0,     LegKneeSx:0, Head:0};
-        this.thetaShoot =           {ArmShoulderDx:0,       ArmShoulderSx:90,       ArmElboxSx:90,       ArmElboxDx:0,       LegHipDx:90,       LegHipSx:90,     LegKneeDx:0,     LegKneeSx:0, Head:0};
-        }
+
     }
     
     updateLists(enemyList,environmentList,projectileList,pickupList){
@@ -492,93 +574,59 @@ class RobotBox{
         }
 
         initWalkingAnimation(){
-            
-            this.walkingTweenReset = new TWEEN.Tween(this.currentTheta)
-            .to(this.thetaIdle,200)
-            .easing(TWEEN.Easing.Quadratic.InOut);
-
             this.walkingTween1 = new TWEEN.Tween(this.currentTheta)
-            .to( this.thetaWalkingLegSpread, 200)
-            .easing(TWEEN.Easing.Quadratic.InOut)
-
-            this.walkingTweenReset2 = new TWEEN.Tween(this.currentTheta)
-            .to(this.thetaIdle,200)
+            .to(this.walkThetaStage1,200)
             .easing(TWEEN.Easing.Quadratic.InOut);
 
             this.walkingTween2 = new TWEEN.Tween(this.currentTheta)
-            .to( this.thetaWalkingLegSpreadRev, 200)
-            .easing(TWEEN.Easing.Quadratic.InOut)
+            .to(this.walkThetaStage2,200)
+            .easing(TWEEN.Easing.Quadratic.InOut);
 
-            this.walkingTweenReset.chain(this.walkingTween1);
+            this.walkingTween1.chain(this.walkingTween2);
+            this.walkingTween2.chain(this.walkingTween1);
 
-            this.walkingTween1.chain(this.walkingTweenReset2);
-
-            this.walkingTweenReset2.chain(this.walkingTween2);
-
-            this.walkingTween2.chain(this.walkingTweenReset);
+            
 
         }
 
         initIdleAnimation(){
             this.idleTween = new TWEEN.Tween(this.currentTheta)
-            .to(this.thetaIdle,1000)
+            .to(this.idleTheta,200)
             .easing(TWEEN.Easing.Quadratic.InOut);
-
-            this.idleTweenRotate = new TWEEN.Tween(this.currentTheta)
-            .to(this.thetaIdleRotation,1000)
-            .easing(TWEEN.Easing.Quadratic.InOut);
-
-            this.idleTween2 = new TWEEN.Tween(this.currentTheta)
-            .to(this.thetaIdle,1000)
-            .easing(TWEEN.Easing.Quadratic.InOut);
-
-            this.idleTweenRotate2 = new TWEEN.Tween(this.currentTheta)
-            .to(this.thetaIdleRotation2,1000)
-            .easing(TWEEN.Easing.Quadratic.InOut);
-
-            this.idleTween.chain(this.idleTweenRotate);
-            this.idleTweenRotate.chain(this.idleTween2);
-            this.idleTween2.chain(this.idleTweenRotate2);
-            this.idleTweenRotate2.chain(this.idleTween);
         }
 
 
         initJumpUpAnimation(){
-            this.jumpUpTween = new TWEEN.Tween(this.currentTheta)
-            .to(this.thetaJumpUp,200)
-            .easing(TWEEN.Easing.Quadratic.InOut)
-            .onComplete(function(){
-                this.jumpAnimationEnded = true;
-            }.bind(this));
+           
         }
 
 
         initShootAnimation(){
             this.shootTween = new TWEEN.Tween(this.currentTheta)
-            .to(this.thetaShoot,500)
+            .to(this.shootTheta,500)
             .easing(TWEEN.Easing.Quadratic.InOut)
             .onComplete(function() {
                 this.shootAnimationEnded = true;
             }.bind(this));
+    
 
         }
 
 
         initAnimations(){
             this.initIdleAnimation();
-            this.initWalkingAnimation();
-            this.initJumpUpAnimation();
             this.initShootAnimation();
+            this.initWalkingAnimation();
         }
 
         updateAnimation(commands){
-        //console.log(this.state)
         switch(this.state){
 
             case 'Idle': 
             if(this.stateChanged){
                 this.stateChanged = false;
                 this.idleTween.start();
+                
             }
             if(commands.forward || commands.backward){
                 this.state = 'Walk';
@@ -588,7 +636,7 @@ class RobotBox{
             if(!this.jumpAvailable){
                 this.state = 'Jump';
                 this.stateChanged = true;
-                this.walkingTweenReset.stop();
+                this.walkingTween1.stop();
             }
             if(!this.shootAvailable){
                 this.state = 'Shoot';
@@ -600,34 +648,34 @@ class RobotBox{
             case 'Walk': 
             if(this.stateChanged){
                 this.stateChanged = false;
-                this.walkingTweenReset.start();
+                this.walkingTween1.start();
             }
             if(!commands.forward && !commands.backward){
                 this.state = 'Idle';
                 this.stateChanged = true;
-                this.walkingTweenReset.stop();
+                this.walkingTween1.stop();
             }
             if(!this.jumpAvailable){
                 this.state = 'Jump';
                 this.stateChanged = true;
-                this.walkingTweenReset.stop();
+                this.walkingTween1.stop();
             }
             if(!this.shootAvailable){
                 this.state = 'Shoot';
                 this.stateChanged = true;
-                this.walkingTweenReset.stop();
+                this.walkingTween1.stop();
             }
             break;
             case 'Jump':
                 if(this.stateChanged){
                     this.stateChanged = false;
-                    this.jumpUpTween.start();
+                    //this.jumpUpTween.start();
                 }
                 if( this.jumpAnimationEnded && this.jumpAvailable){
                     this.jumpAnimationEnded = false;
                     this.state = 'Idle';
                     this.stateChanged = true;
-                    this.jumpUpTween.stop();
+                    //this.jumpUpTween.stop();
                 }
             break;
             case 'Shoot':
@@ -645,8 +693,24 @@ class RobotBox{
 
         }
         if(this.name == "Enemy"){
-            this.mesh.getObjectByName("mixamorigHead").rotation.y = this.currentTheta.mixamorigHead * Math.PI / 180.0;
-            this.mesh.getObjectByName("mixamorigLeftArm").rotation.z = this.currentTheta.mixamorigLeftArm * Math.PI / 180.0;
+        
+            //this.mesh.getObjectByName("mixamorigHead").quaternion.set(0,this.currentTheta.mixamorigHead,0,1);
+            //this.mesh.getObjectByName("mixamorigLeftShoulder").quaternion.set(this.currentTheta.mixamorigLeftShoulderX,this.currentTheta.mixamorigLeftShoulderY,this.currentTheta.mixamorigLeftShoulderZ,1);
+            //this.mesh.getObjectByName("mixamorigRightShoulder").quaternion.set(this.currentTheta.mixamorigRightShoulderX,this.currentTheta.mixamorigRightShoulderY,this.currentTheta.mixamorigRightShoulderZ,1);
+            this.mesh.getObjectByName("mixamorigLeftArm").quaternion.set(this.currentTheta.mixamorigLeftArmX,this.currentTheta.mixamorigLeftArmY,this.currentTheta.mixamorigLeftArmZ,1);
+            this.mesh.getObjectByName("mixamorigRightArm").quaternion.set(this.currentTheta.mixamorigRightArmX,this.currentTheta.mixamorigRightArmY,this.currentTheta.mixamorigRightArmZ,1);
+            this.mesh.getObjectByName("mixamorigLeftForeArm").quaternion.set(0,0,this.currentTheta.mixamorigLeftForeArmZ,1);
+            this.mesh.getObjectByName("mixamorigRightForeArm").quaternion.set(0,0,this.currentTheta.mixamorigRightForeArmZ,1);
+            this.mesh.getObjectByName("mixamorigSpine").quaternion.set(this.currentTheta.mixamorigSpineX,0,0,1);
+            this.mesh.getObjectByName("mixamorigLeftUpLeg").quaternion.y = this.currentTheta.mixamorigLeftUpLegY;
+            this.mesh.getObjectByName("mixamorigLeftLeg").quaternion.set(this.currentTheta.mixamorigLeftLegX, this.currentTheta.mixamorigLeftLegY,this.currentTheta.mixamorigLeftLegZ,1)
+            this.mesh.getObjectByName("mixamorigRightUpLeg").quaternion.y = this.currentTheta.mixamorigRightUpLegY;
+            this.mesh.getObjectByName("mixamorigRightLeg").quaternion.set(this.currentTheta.mixamorigRightLegX, this.currentTheta.mixamorigRightLegY,this.currentTheta.mixamorigRightLegZ,1)
+
+          
+            console.log(this.currentTheta)
+            //console.log(this.mesh)
+
 
         }
         /*
