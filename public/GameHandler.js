@@ -5,9 +5,10 @@ import {EnemyHandler} from './EnemyHandler.js'
 import {PlayerHandler} from './PlayerHandler.js'
 import {HudHandler} from './HudHandler.js'
 import {UfoSpawner} from './UfoSpawner.js'
+import {EffectsHandler} from './EffectsHandler.js'
 
 class GameHandler {
-    constructor(RobotMesh,AlienMesh,UfoMesh,MapEntity,Controls,scene){
+    constructor(RobotMesh,AlienMesh,UfoMesh,MapEntity,Controls,Composer,scene){
         this.gameState = "Setup";
         this.scene = scene;
         this.MapEntity = MapEntity;
@@ -31,9 +32,13 @@ class GameHandler {
         this.EnemyHandler = new EnemyHandler(this.enemyList, this.ProjectileHandler, this.AlienMesh, this.UfoMesh,this.scene);
         this.UfoSpawner = new UfoSpawner(this.UfoMesh,this.scene);
 
+        this.Composer = Composer;
+        this.EffectsHandler = new EffectsHandler(this.Composer);
+
 
         this.HudHandler = new HudHandler();
         this.difficulty = "Easy";
+
 
 
         this.cameraLookAt = new THREE.Vector3(0,2,10);
@@ -139,6 +144,7 @@ class GameHandler {
         this.PickUpHandler.update(this.PlayerHandler,clockDelta);
 
         this.HudHandler.updateInformations(this.PlayerHandler, this.enemyList, this.EnemyHandler.currentWave);
+        this.EffectsHandler.update(this.PlayerHandler.RobotModel.health, this.PlayerHandler.RobotModel.ammo);
 
 
         if(this.PlayerHandler.RobotModel.health <= 0){

@@ -12,6 +12,11 @@ import {MapHandler} from './MapHandler.js';
 import { SkyBox } from './SkyBox.js'
 import {GameHandler} from './GameHandler.js';
 
+import { EffectComposer } from './jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from './jsm/postprocessing/RenderPass.js';
+import { GlitchPass } from './jsm/postprocessing/GlitchPass.js';
+import {FilmPass} from './jsm/postprocessing/FilmPass.js';
+
 const canvas = document.querySelector('.web-gl');
 
 // showing fps
@@ -79,12 +84,15 @@ renderer.setClearColor = (0x000000, 0.0);
 renderer.outputEncoding = THREE.sRGBEncoding;
 console.log(renderer);
 
+const composer = new EffectComposer( renderer );
+
+
 // Adding orbit controls
 const controls = new OrbitControls(camera, renderer.domElement);
 
 // Starting Game Handler
 
-const GameEntity = new GameHandler(Robot3DModel,Alien3DModel,Ufo3DModel,MapEntity,controls,scene)
+const GameEntity = new GameHandler(Robot3DModel,Alien3DModel,Ufo3DModel,MapEntity,controls,composer,scene)
 GameEntity.startIntro();
 
 renderer.domElement.addEventListener("click", function(event){
@@ -94,11 +102,21 @@ renderer.domElement.addEventListener("click", function(event){
 }, true);
 
 
+const renderPass = new RenderPass( scene, camera );
+composer.addPass( renderPass );
 
+const glitchPass = new FilmPass();
+composer.addPass( glitchPass );
+
+
+composer.passes[0].renderToScreen = true;
+composer.passes[1].enabled = false;
 
 // render function to render the scene
 const render = ()=>{
-    renderer.render(scene, camera);
+
+    composer.render();
+    //renderer.render(scene, camera);
 }
 
 

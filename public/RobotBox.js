@@ -25,7 +25,7 @@ class RobotBox{
         this.jumpVelocity = 0.1;
         this.gravityVelocity = 0.1;
         this.health = 100;
-        this.ammo = 50;
+        this.ammo = 20;
         this.playerHitDamage = 20;
         this.enemyHitDamage = 50;
         this.hasBeenHit = false;
@@ -854,7 +854,7 @@ this.walkThetaStage4=
 
         setDifficulty(difficulty){
             if(difficulty == "Easy"){
-                this.playerDifficultyModifier = 0.1;
+                this.playerDifficultyModifier = 0.2;
                 this.enemyDifficultyModifier = 2.0;
             }
             else if(difficulty == "Medium"){
