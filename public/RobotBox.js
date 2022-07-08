@@ -1303,7 +1303,7 @@ this.walkThetaStage4=
             this.mesh.getObjectByName("mixamorigRightLeg").rotation.set(this.currentTheta.RightLegX,this.currentTheta.RightLegY,this.currentTheta.RightLegZ );
             
           
-            console.log(this.currentTheta)
+            //console.log(this.currentTheta)
             //console.log(this.mesh)
 
 

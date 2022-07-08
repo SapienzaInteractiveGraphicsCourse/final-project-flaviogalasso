@@ -8,7 +8,7 @@ class PlayerHandler{
         this.RobotMesh = RobotMesh
 
         this.commands = {forward:false, strafeLeft:false, strafeRight:false, rotate:false, backward:false, unrotate:false, jump:false, shift:false, shootPress:false};
-        this.moveVelocity = 5.0;
+        this.moveVelocity = 8.0;
         this.rotateVelocity = 5.0;
         this.gravityVelocity = 5.0;
         this.jumpOffset = 0.1;

@@ -4,12 +4,26 @@ import * as THREE from '/build/three.module.js';
 class Projectile{
 
     constructor(aimData,name){
-        this.projectileScale = new THREE.Vector3(1,5,5);
+
         this.origin = aimData.positionVector.clone();
         this.direction = aimData.directionVector.clone();
 
-        this.geometry = new THREE.SphereGeometry( this.projectileScale[0], this.projectileScale[1], this.projectileScale[2]);
-        this.material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+     
+        if(name == "Player"){
+            this.projectileScale = new THREE.Vector3(1,32,16);
+            this.material = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+            this.geometry = new THREE.SphereGeometry( this.projectileScale.x, this.projectileScale.y, this.projectileScale.z);
+
+        }
+        else{
+            this.projectileScale = new THREE.Vector3(0.5,32,16);
+            this.material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+            this.geometry = new THREE.SphereGeometry( this.projectileScale.x, this.projectileScale.y, this.projectileScale.z);
+
+        }
+        
+        this.material.transparent = true;
+        this.material.opacity= 0.5;
         this.mesh = new THREE.Mesh( this.geometry, this.material );
         this.mesh.position.copy(this.origin);
 

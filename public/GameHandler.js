@@ -36,8 +36,8 @@ class GameHandler {
         this.difficulty = "Easy";
 
 
-        this.cameraLookAt = new THREE.Vector3(0,4,10);
-        this.cameraOffset = new THREE.Vector3(-3,7,-10);
+        this.cameraLookAt = new THREE.Vector3(0,2,10);
+        this.cameraOffset = new THREE.Vector3(-3,10,-10);
 
         this.playerAimAt = null;
         this.rayCastAim = new THREE.Raycaster();
