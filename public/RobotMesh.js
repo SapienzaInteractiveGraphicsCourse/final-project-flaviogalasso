@@ -6,7 +6,7 @@ class RobotMesh{
     }
 async loadModel(){
     this.loader = new GLTFLoader();
-    this.gltfModel = await this.loader.loadAsync("./models/droid.gltf");
+    this.gltfModel = await this.loader.loadAsync("./models/droid_armed.glb");
     this.model = this.gltfModel;
     console.log(this.gltfModel);
     console.log(this.model);

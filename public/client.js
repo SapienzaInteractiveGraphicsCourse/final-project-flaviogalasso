@@ -40,7 +40,7 @@ console.log(camera);
 const light = new THREE.AmbientLight( 0x404040 ); // soft white light
 scene.add( light );
 
-const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.2 );
 scene.add( directionalLight );
 
 
@@ -48,7 +48,7 @@ let SkyBoxEntity = new SkyBox("sky_sp_arcadia");
 scene.background = SkyBoxEntity.skyboxTexture;
 
 const axesHelper = new THREE.AxesHelper( 5 );
-scene.add( axesHelper );
+//scene.add( axesHelper );
 
 let Robot3DModel = new RobotMesh();
 await Robot3DModel.loadModel();

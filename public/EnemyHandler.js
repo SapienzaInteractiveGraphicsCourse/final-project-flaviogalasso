@@ -78,6 +78,7 @@ class EnemyEntity{
         this.chasePlayer(PlayerHandler)
         this.RobotModel.update(this.commands,clockDelta);
         if(this.ufoEnabled) this.updateUfo(clockDelta);
+        
     }
 
     chasePlayer(PlayerHandler){

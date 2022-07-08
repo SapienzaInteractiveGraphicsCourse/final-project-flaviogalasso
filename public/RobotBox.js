@@ -34,6 +34,8 @@ class RobotBox{
         this.healthIncrement = 20;
         this.ammoIncrement = 20;
 
+        this.fallThreshold = -20;
+
 
         this.lerpTime = 10;
         this.idealRotationAngle =  new THREE.Vector3();
@@ -948,6 +950,11 @@ this.walkThetaStage4=
 
             if(this.bumpUp){
                 this.mesh.position.y += 2*this.gravityVelocity * clockDelta;
+            }
+
+            if(this.mesh.position.y <= this.fallThreshold){
+                this.health = 0;
+                console.log(this.name + "died in the void!")
             }
         }
 
