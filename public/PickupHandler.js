@@ -35,7 +35,7 @@ class PickUpHandler {
         this.maxPickups = 3.0;
         this.scene = scene;
 
-        this.geometry = new THREE.BoxGeometry( 1, 1, 1 );
+        this.geometry = new THREE.BoxGeometry( 1.2, 1.2, 1.2 );
         this.ammoMaterial = new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load( this.ammoTexturePath ), transparent:true } );  
         this.healthMaterial = new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load( this.healthTexturePath ), transparent: true } );   
        
@@ -53,12 +53,12 @@ class PickUpHandler {
         if( this.pickupList.length < this.maxPickups){
             if( Math.random() > this.probabilityOfNotSpawningHealth){
                 var playerPos = PlayerHandler.getPosition();
-                var newPos = new THREE.Vector3(playerPos.x + Math.random() * this.spawnRadius, playerPos.y+0.5, playerPos.z + Math.random() * this.spawnRadius);
+                var newPos = new THREE.Vector3(playerPos.x + Math.random() * this.spawnRadius, playerPos.y+1, playerPos.z + Math.random() * this.spawnRadius);
                 this.spawnPickup("Health",this.scene,newPos)
             }
             if ( Math.random() > this.probabilityOfNotSpawningAmmo){
                 var playerPos = PlayerHandler.getPosition();
-                var newPos = new THREE.Vector3(playerPos.x + Math.random() * this.spawnRadius, playerPos.y + 0.5, playerPos.z + Math.random() * this.spawnRadius);
+                var newPos = new THREE.Vector3(playerPos.x + Math.random() * this.spawnRadius, playerPos.y + 1, playerPos.z + Math.random() * this.spawnRadius);
                 this.spawnPickup("Ammo",this.scene,newPos);
     
             }

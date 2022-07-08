@@ -262,7 +262,7 @@ class RobotBox{
     "BotarmLX": 0.48569338637270015,
     "BotarmLY": -0.034334654688150404,
     "BotarmLZ": -0.1289355159878485,
-    "handLX": -0.12613816696014768,
+    "handLX":0,
     "handLY": 0.03306541351716344,
     "handLZ": -0.10283799167019156,
     "sholdrRX": 0.061336640907709086,
@@ -274,7 +274,7 @@ class RobotBox{
     "BotarmRX": 0.4856932556121642,
     "BotarmRY": 0.03433494867881172,
     "BotarmRZ": 0.12893561225529454,
-    "handRX": -0.1261382202760031,
+    "handRX": 0,
     "handRY": -0.033064935933625826,
     "handRZ": 0.10283802047728159,
     "thighRX": 3.138725876367109,
@@ -329,7 +329,7 @@ class RobotBox{
     "BotarmLX": 0.48569338637270015,
     "BotarmLY": -0.034334654688150404,
     "BotarmLZ": -0.1289355159878485,
-    "handLX": -0.12613816696014768,
+    "handLX": 0,
     "handLY": 0.03306541351716344,
     "handLZ": -0.10283799167019156,
     "sholdrRX": 0.061336640907709086,
@@ -341,7 +341,141 @@ class RobotBox{
     "BotarmRX": 0.4856932556121642,
     "BotarmRY": 0.03433494867881172,
     "BotarmRZ": 0.12893561225529454,
-    "handRX": -0.1261382202760031,
+    "handRX": 0,
+    "handRY": -0.033064935933625826,
+    "handRZ": 0.10283802047728159,
+    "thighRX": 3.138725876367109,
+    "thighRY": 0.002384419000448791,
+    "thighRZ": 0.06817848835524147,
+    "legRX": 0.09330354992098742,
+    "legRY": -0.0036221256489619006,
+    "legRZ": 0.025111122789041804,
+    "f2X": -1.7018454476974034,
+    "f2Y": 0.09817165234674743,
+    "f2Z": 0.0070434944296504905,
+    "thighLX": 3.138725876367109,
+    "thighLY": -0.002384419000448791,
+    "thighLZ": -0.06817848835524147,
+    "legLX": 0.09330354992098742,
+    "legLY": 0.0036221256489619006,
+    "legLZ": -0.025111122789041804,
+    "f1X": -1.7018454476974034,
+    "f1Y": -0.09817165234674743,
+    "f1Z": -0.0070434944296504905,
+    "p2X": 1.5707964289810077,
+    "p2Y": -0.0652798898956343,
+    "p2Z": 2.7567248570272826e-9,
+    "p1X": 1.5707964289810077,
+    "p1Y": 0.0652798898956343,
+    "p1Z": -2.7567248570272826e-9
+}
+
+this.shootTheta=
+{
+    "base_1X": 0.03997873202194714,
+    "base_1Y": 0,
+    "base_1Z": 0,
+    "stomacheX": -0.07329968451400774,
+    "stomacheY": 0,
+    "stomacheZ": 0,
+    "chest_1X": -0.1318277013968113,
+    "chest_1Y": 0,
+    "chest_1Z": 0,
+    "neckX": 0.6722469711332419,
+    "neckY": 2.3841850115938654e-7,
+    "neckZ": 2.1415186298406237e-14,
+    "headX": -0.5070982803828901,
+    "headY": -2.084152952057006e-7,
+    "headZ": -1.1578621926952094e-7,
+    "sholdrLX": 0.061336524879602,
+    "sholdrLY": 0.19061001963853602,
+    "sholdrLZ": -2.050688083467387,
+    "uparmLX": 1.35017243083952209358,
+    "uparmLY": -0.74223495519177904,
+    "uparmLZ": -0.496779221147016,
+    "BotarmLX": -0.14569338637270015,
+    "BotarmLY": -0.284334654688150404,
+    "BotarmLZ": -0.689355159878485,
+    "handLX": 0,
+    "handLY": 0.03306541351716344,
+    "handLZ": -0.10283799167019156,
+    "sholdrRX": 0.061336640907709086,
+    "sholdrRY": -0.19060982634939838,
+    "sholdrRZ": 2.1,
+    "uparmRX": 0.4817242791737077615,
+    "uparmRY": 1.14223519408225165,
+    "uparmRZ": 0.7671267947848937,
+    "BotarmRX": 0.4856932556121642,
+    "BotarmRY": -0.06433494867881172,
+    "BotarmRZ": 0.22893561225529454,
+    "handRX": 0,
+    "handRY": -0.033064935933625826,
+    "handRZ": 0.10283802047728159,
+    "thighRX": 3.138725876367109,
+    "thighRY": 0.002384419000448791,
+    "thighRZ": 0.06817848835524147,
+    "legRX": 0.09330354992098742,
+    "legRY": -0.0036221256489619006,
+    "legRZ": 0.025111122789041804,
+    "f2X": -1.7018454476974034,
+    "f2Y": 0.09817165234674743,
+    "f2Z": 0.0070434944296504905,
+    "thighLX": 3.138725876367109,
+    "thighLY": -0.002384419000448791,
+    "thighLZ": -0.06817848835524147,
+    "legLX": 0.09330354992098742,
+    "legLY": 0.0036221256489619006,
+    "legLZ": -0.025111122789041804,
+    "f1X": -1.7018454476974034,
+    "f1Y": -0.09817165234674743,
+    "f1Z": -0.0070434944296504905,
+    "p2X": 1.5707964289810077,
+    "p2Y": -0.0652798898956343,
+    "p2Z": 2.7567248570272826e-9,
+    "p1X": 1.5707964289810077,
+    "p1Y": 0.0652798898956343,
+    "p1Z": -2.7567248570272826e-9
+}
+
+this.jumpTheta=
+{
+    "base_1X": 0.03997873202194714,
+    "base_1Y": 0,
+    "base_1Z": 0,
+    "stomacheX": -0.07329968451400774,
+    "stomacheY": 0,
+    "stomacheZ": 0,
+    "chest_1X": -0.1318277013968113,
+    "chest_1Y": 0,
+    "chest_1Z": 0,
+    "neckX": 0.6722469711332419,
+    "neckY": 2.3841850115938654e-7,
+    "neckZ": 2.1415186298406237e-14,
+    "headX": -0.5070982803828901,
+    "headY": -2.084152952057006e-7,
+    "headZ": -1.1578621926952094e-7,
+    "sholdrLX": 0.061336524879602,
+    "sholdrLY": 0.19061001963853602,
+    "sholdrLZ": -2.050688083467387,
+    "uparmLX": 0.00017243083952209358,
+    "uparmLY": -0.04223495519177904,
+    "uparmLZ": 0.5766779221147016,
+    "BotarmLX": 0.48569338637270015,
+    "BotarmLY": -0.034334654688150404,
+    "BotarmLZ": -0.1289355159878485,
+    "handLX": 0,
+    "handLY": 0.03306541351716344,
+    "handLZ": -0.10283799167019156,
+    "sholdrRX": 0.061336640907709086,
+    "sholdrRY": -0.19060982634939838,
+    "sholdrRZ": 2.1,
+    "uparmRX": 0.0017242791737077615,
+    "uparmRY": 0.04223519408225165,
+    "uparmRZ": -0.571267947848937,
+    "BotarmRX": 0.4856932556121642,
+    "BotarmRY": 0.03433494867881172,
+    "BotarmRZ": 0.12893561225529454,
+    "handRX": 0,
     "handRY": -0.033064935933625826,
     "handRZ": 0.10283802047728159,
     "thighRX": 3.138725876367109,
@@ -396,7 +530,7 @@ this.walkThetaStage1 =
     "BotarmLX": 0.14346407947635598,
     "BotarmLY": -0.034334654688150404,
     "BotarmLZ": -0.1289355159878485,
-    "handLX": -0.12613816696014768,
+    "handLX": 0,
     "handLY": 0.03306541351716344,
     "handLZ": -0.10283799167019156,
     "sholdrRX": -0.2723110640626687,
@@ -405,10 +539,10 @@ this.walkThetaStage1 =
     "uparmRX": 0.0017242791737077615,
     "uparmRY": 0.04223519408225165,
     "uparmRZ": 0.7671267947848937,
-    "BotarmRX": 0.2127599367328603,
+    "BotarmRX": 0.7827599367328603,
     "BotarmRY": 0.03433494867881172,
     "BotarmRZ": 0.12893561225529454,
-    "handRX": -0.1261382202760031,
+    "handRX": 0,
     "handRY": -0.033064935933625826,
     "handRZ": 0.10283802047728159,
     "thighRX": 3.3086336275563,
@@ -423,7 +557,7 @@ this.walkThetaStage1 =
     "thighLX": 2.506589043039019,
     "thighLY": -0.002384419000448791,
     "thighLZ": -0.06817848835524147,
-    "legLX": 0.28781328045572474,
+    "legLX": 0.49781328045572474,
     "legLY": 0.0036221256489619006,
     "legLZ": -0.025111122789041804,
     "f1X": -1.7018454476974034,
@@ -437,6 +571,72 @@ this.walkThetaStage1 =
     "p1Z": -2.7567248570272826e-9
 }
 this.walkThetaStage2=
+{
+    "base_1X": 0.03997873202194714,
+    "base_1Y": 0,
+    "base_1Z": 0,
+    "stomacheX": -0.07329968451400774,
+    "stomacheY": 0,
+    "stomacheZ": 0,
+    "chest_1X": 0.15,
+    "chest_1Y": -0.05,
+    "chest_1Z": 0,
+    "neckX": 0.6722469711332419,
+    "neckY": 2.3841850115938654e-7,
+    "neckZ": 2.1415186298406237e-14,
+    "headX": -0.5070982803828901,
+    "headY": -2.084152952057006e-7,
+    "headZ": -1.1578621926952094e-7,
+    "sholdrLX": 0.061336524879602,
+    "sholdrLY": 0.19061001963853602,
+    "sholdrLZ": -2.050688083467387,
+    "uparmLX": 0.0017243083952209358,
+    "uparmLY": -0.04223495519177904,
+    "uparmLZ": -0.82,
+    "BotarmLX": 0.14,
+    "BotarmLY": -0.034334654688150404,
+    "BotarmLZ": -0.1289355159878485,
+    "handLX": 0,
+    "handLY": 0.03306541351716344,
+    "handLZ": -0.10283799167019156,
+    "sholdrRX": 0.061336640907709086,
+    "sholdrRY": -0.19060982634939838,
+    "sholdrRZ": 2.0506880755386456,
+    "uparmRX": 0.0017242791737077615,
+    "uparmRY": 0.04223519408225165,
+    "uparmRZ": 0.76,
+    "BotarmRX": 0.21,
+    "BotarmRY": 0.03433494867881172,
+    "BotarmRZ": 0.12893561225529454,
+    "handRX": 0,
+    "handRY": -0.033064935933625826,
+    "handRZ": 0.10283802047728159,
+    "thighRX": 2.638114940710505,
+    "thighRY": 0.002384419000448791,
+    "thighRZ": 0.06817848835524147,
+    "legRX": 1.113606081067414,
+    "legRY": -0.0036221256489619006,
+    "legRZ": 0.025111122789041804,
+    "f2X": -1.7018454476974034,
+    "f2Y": 0.09817165234674743,
+    "f2Z": 0.0070434944296504905,
+    "thighLX": 3.138725876367109,
+    "thighLY": -0.002384419000448791,
+    "thighLZ": -0.06817848835524147,
+    "legLX": 0.09330354992098742,
+    "legLY": 0.0036221256489619006,
+    "legLZ": -0.025111122789041804,
+    "f1X": -1.7018454476974034,
+    "f1Y": -0.09817165234674743,
+    "f1Z": -0.0070434944296504905,
+    "p2X": 1.5707964289810077,
+    "p2Y": -0.0652798898956343,
+    "p2Z": 2.7567248570272826e-9,
+    "p1X": 1.5707964289810077,
+    "p1Y": 0.0652798898956343,
+    "p1Z": -2.7567248570272826e-9
+}
+this.walkThetaStage3=
 {
     "base_1X": 0.03997873202194714,
     "base_1Y": 0,
@@ -459,13 +659,13 @@ this.walkThetaStage2=
     "uparmLX": 0.0017243083952209358,
     "uparmLY": -0.04223495519177904,
     "uparmLZ": -0.8266,
-    "BotarmLX": 0.21,
+    "BotarmLX": 0.78,
     "BotarmLY": -0.034334654688150404,
     "BotarmLZ": -0.1289355159878485,
-    "handLX": -0.12613816696014768,
+    "handLX": 0,
     "handLY": 0.03306541351716344,
     "handLZ": -0.10283799167019156,
-    "sholdrRX": 0.351,
+    "sholdrRX": 0.2,
     "sholdrRY": -0.19060982634939838,
     "sholdrRZ": 2.1,
     "uparmRX": 0.0017242791737077615,
@@ -474,13 +674,13 @@ this.walkThetaStage2=
     "BotarmRX": 0.14,
     "BotarmRY": 0.03433494867881172,
     "BotarmRZ": 0.12893561225529454,
-    "handRX": -0.1261382202760031,
+    "handRX": 0,
     "handRY": -0.033064935933625826,
     "handRZ": 0.10283802047728159,
     "thighRX": 2.5,
     "thighRY": 0.002384419000448791,
     "thighRZ": 0.06817848835524147,
-    "legRX": 0.288,
+    "legRX": 0.498,
     "legRY": -0.0036221256489619006,
     "legRZ": 0.025111122789041804,
     "f2X": -1.7018454476974034,
@@ -490,6 +690,72 @@ this.walkThetaStage2=
     "thighLY": -0.002384419000448791,
     "thighLZ": -0.06817848835524147,
     "legLX": 0.09330354992098742,
+    "legLY": 0.0036221256489619006,
+    "legLZ": -0.025111122789041804,
+    "f1X": -1.7018454476974034,
+    "f1Y": -0.09817165234674743,
+    "f1Z": -0.0070434944296504905,
+    "p2X": 1.5707964289810077,
+    "p2Y": -0.0652798898956343,
+    "p2Z": 2.7567248570272826e-9,
+    "p1X": 1.5707964289810077,
+    "p1Y": 0.0652798898956343,
+    "p1Z": -2.7567248570272826e-9
+}
+this.walkThetaStage4=
+{
+    "base_1X": 0.03997873202194714,
+    "base_1Y": 0,
+    "base_1Z": 0,
+    "stomacheX": -0.07329968451400774,
+    "stomacheY": 0,
+    "stomacheZ": 0,
+    "chest_1X": 0.15,
+    "chest_1Y": -0.05,
+    "chest_1Z": 0,
+    "neckX": 0.6722469711332419,
+    "neckY": 2.3841850115938654e-7,
+    "neckZ": 2.1415186298406237e-14,
+    "headX": -0.5070982803828901,
+    "headY": -2.084152952057006e-7,
+    "headZ": -1.1578621926952094e-7,
+    "sholdrLX": 0.061336524879602,
+    "sholdrLY": 0.19061001963853602,
+    "sholdrLZ": -2.050688083467387,
+    "uparmLX": 0.0017243083952209358,
+    "uparmLY": -0.04223495519177904,
+    "uparmLZ": -0.82,
+    "BotarmLX": 0.14,
+    "BotarmLY": -0.034334654688150404,
+    "BotarmLZ": -0.1289355159878485,
+    "handLX": 0,
+    "handLY": 0.03306541351716344,
+    "handLZ": -0.10283799167019156,
+    "sholdrRX": 0.061336640907709086,
+    "sholdrRY": -0.19060982634939838,
+    "sholdrRZ": 2.0506880755386456,
+    "uparmRX": 0.0017242791737077615,
+    "uparmRY": 0.04223519408225165,
+    "uparmRZ": 0.76,
+    "BotarmRX": 0.21,
+    "BotarmRY": 0.03433494867881172,
+    "BotarmRZ": 0.12893561225529454,
+    "handRX": 0,
+    "handRY": -0.033064935933625826,
+    "handRZ": 0.10283802047728159,
+    "thighRX": 3.13114940710505,
+    "thighRY": 0.002384419000448791,
+    "thighRZ": 0.06817848835524147,
+    "legRX": 0.933606081067414,
+    "legRY": -0.0036221256489619006,
+    "legRZ": 0.025111122789041804,
+    "f2X": -1.7018454476974034,
+    "f2Y": 0.09817165234674743,
+    "f2Z": 0.0070434944296504905,
+    "thighLX": 2.6388725876367109, //2.638
+    "thighLY": -0.002384419000448791,
+    "thighLZ": -0.06817848835524147,
+    "legLX": 1.11330354992098742, //1.11
     "legLY": 0.0036221256489619006,
     "legLZ": -0.025111122789041804,
     "f1X": -1.7018454476974034,
@@ -548,12 +814,13 @@ this.walkThetaStage2=
         this.initAnimations();
 
         this.scene.add(this.mesh);
-        this.scene.add(this.aimLine);
+        /*this.scene.add(this.aimLine);
         this.scene.add(this.rayCastBackHelper);
         this.scene.add(this.rayCastFrontHelper)
         this.scene.add(this.rayCastDownHelper);
         this.scene.add(this.rayCastUpHelper);
         this.scene.add(this.rayCastUpShootHelper);
+        */
 
     }
 
@@ -866,45 +1133,28 @@ this.walkThetaStage2=
             }
             else{
                 this.walkingTween1 = new TWEEN.Tween(this.currentTheta)
-                .to(this.walkThetaStage1,400)
-                .easing(TWEEN.Easing.Quadratic.InOut);
+                .to(this.walkThetaStage1,200)
+                .easing(TWEEN.Easing.Linear.None);
     
                 this.walkingTween2 = new TWEEN.Tween(this.currentTheta)
-                .to(this.walkThetaStage2,400)
-                .easing(TWEEN.Easing.Quadratic.InOut);
-    
-                this.walkingTween1.chain(this.walkingTween2);
-                this.walkingTween2.chain(this.walkingTween1);
-                /*
-                this.walkingTween1 = new TWEEN.Tween(this.currentTheta) //Contact
-                .to(this.walkThetaStage1,200)
-                .easing(TWEEN.Easing.Quadratic.InOut);
-    
-                this.walkingTween2 = new TWEEN.Tween(this.currentTheta) //Down
                 .to(this.walkThetaStage2,200)
-                .easing(TWEEN.Easing.Quadratic.InOut);
+                .easing(TWEEN.Easing.Linear.None);
 
                 
-                this.walkingTween3 = new TWEEN.Tween(this.currentTheta) //Passing
+                this.walkingTween3 = new TWEEN.Tween(this.currentTheta)
                 .to(this.walkThetaStage3,200)
-                .easing(TWEEN.Easing.Quadratic.InOut);
+                .easing(TWEEN.Easing.Linear.None);
 
                 
-                this.walkingTween4 = new TWEEN.Tween(this.currentTheta) //Up
+                this.walkingTween4 = new TWEEN.Tween(this.currentTheta)
                 .to(this.walkThetaStage4,200)
-                .easing(TWEEN.Easing.Quadratic.InOut);
-
-                
-                this.walkingTween5 = new TWEEN.Tween(this.currentTheta) //Contact Reversed
-                .to(this.walkThetaStage5,200)
-                .easing(TWEEN.Easing.Quadratic.InOut);
+                .easing(TWEEN.Easing.Linear.None);
     
                 this.walkingTween1.chain(this.walkingTween2);
                 this.walkingTween2.chain(this.walkingTween3);
                 this.walkingTween3.chain(this.walkingTween4);
-                this.walkingTween4.chain(this.walkingTween5);
-                this.walkingTween5.chain(this.walkingTween1);
-                */
+                this.walkingTween4.chain(this.walkingTween1);
+    
 
             }
             
@@ -921,6 +1171,19 @@ this.walkThetaStage2=
 
 
         initJumpUpAnimation(){
+            this.jumpUpTween = new TWEEN.Tween(this.currentTheta)
+            .to(this.jumpTheta,200)
+            .easing(TWEEN.Easing.Quadratic.InOut)
+            .onComplete(function(){
+                this.jumpAnimationEnded = true;
+            }.bind(this));
+
+        
+            this.jumpDownTween = new TWEEN.Tween(this.currentTheta)
+            .to(this.idleTheta,200)
+            .easing(TWEEN.Easing.Quadratic.InOut)
+
+            this.jumpUpTween.chain( this.jumpDownTween)
            
         }
 
@@ -941,6 +1204,8 @@ this.walkThetaStage2=
             this.initIdleAnimation();
             this.initShootAnimation();
             this.initWalkingAnimation();
+            this.initJumpUpAnimation();
+            
         }
 
         updateAnimation(commands){
@@ -993,13 +1258,13 @@ this.walkThetaStage2=
             case 'Jump':
                 if(this.stateChanged){
                     this.stateChanged = false;
-                    //this.jumpUpTween.start();
+                    this.jumpUpTween.start();
                 }
                 if( this.jumpAnimationEnded && this.jumpAvailable){
                     this.jumpAnimationEnded = false;
                     this.state = 'Idle';
                     this.stateChanged = true;
-                    //this.jumpUpTween.stop();
+                    this.jumpUpTween.stop();
                 }
             break;
             case 'Shoot':

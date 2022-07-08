@@ -86,7 +86,7 @@ class GameHandler {
 
     startGame(){
         this.resetEntities();
-        this.scene.add(this.rayCastAimHelper)
+        //this.scene.add(this.rayCastAimHelper)
         this.PlayerHandler.init();
         this.MapEntity.spawnMap();
         this.PlayerHandler.RobotModel.setProjectileHandler(this.ProjectileHandler);
