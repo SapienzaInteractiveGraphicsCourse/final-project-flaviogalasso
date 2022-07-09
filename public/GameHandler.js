@@ -41,7 +41,7 @@ class GameHandler {
 
 
 
-        this.cameraLookAt = new THREE.Vector3(0,2,10);
+        this.cameraLookAt = new THREE.Vector3(0,3,10);
         this.cameraOffset = new THREE.Vector3(-3,10,-10);
 
         this.playerAimAt = null;
@@ -81,6 +81,7 @@ class GameHandler {
         this.Controls.object.position.set( 0, 40, 30 );
         this.Controls.autoRotate = true;
         this.Controls.target = this.PlayerHandler.getPosition();
+   
         this.UfoSpawner.spawnUfo(this.PlayerHandler.getPosition());
 
         this.HudHandler.introductionScene();
@@ -102,6 +103,8 @@ class GameHandler {
         this.EnemyHandler.setDifficulty(this.difficulty);
 
         this.UfoSpawner.spawnUfo(this.PlayerHandler.getPosition());
+
+
     }
 
     update(clockDelta){

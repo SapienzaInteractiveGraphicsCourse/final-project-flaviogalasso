@@ -109,6 +109,8 @@ class RobotBox{
         this.shootAvailable = true;
         this.shootAnimationEnded = false;
 
+        this.ticks = 0;
+
         if(this.name == "Enemy"){
 
             this.idleTheta = {
@@ -715,13 +717,13 @@ this.walkThetaStage4=
     "chest_1X": 0.15,
     "chest_1Y": -0.05,
     "chest_1Z": 0,
-    "neckX": 0.6722469711332419,
-    "neckY": 2.3841850115938654e-7,
-    "neckZ": 2.1415186298406237e-14,
+    "neckX": 0.67,
+    "neckY": 0,
+    "neckZ": 0,
     "headX": -0.5070982803828901,
     "headY": -2.084152952057006e-7,
     "headZ": -1.1578621926952094e-7,
-    "sholdrLX": 0.061336524879602,
+    "sholdrLX": 0.06,
     "sholdrLY": 0.19061001963853602,
     "sholdrLZ": -2.050688083467387,
     "uparmLX": 0.0017243083952209358,
@@ -732,32 +734,32 @@ this.walkThetaStage4=
     "BotarmLZ": -0.1289355159878485,
     "handLX": 0,
     "handLY": 0.03306541351716344,
-    "handLZ": -0.10283799167019156,
-    "sholdrRX": 0.061336640907709086,
+    "handLZ": -0.1,
+    "sholdrRX": 0.06,
     "sholdrRY": -0.19060982634939838,
     "sholdrRZ": 2.0506880755386456,
     "uparmRX": 0.0017242791737077615,
     "uparmRY": 0.04223519408225165,
     "uparmRZ": 0.76,
     "BotarmRX": 0.21,
-    "BotarmRY": 0.03433494867881172,
-    "BotarmRZ": 0.12893561225529454,
+    "BotarmRY": 0.03,
+    "BotarmRZ": 0.12,
     "handRX": 0,
     "handRY": -0.033064935933625826,
     "handRZ": 0.10283802047728159,
-    "thighRX": 3.13114940710505,
+    "thighRX": 3.1,
     "thighRY": 0.002384419000448791,
     "thighRZ": 0.06817848835524147,
-    "legRX": 0.933606081067414,
+    "legRX": 0.093,
     "legRY": -0.0036221256489619006,
     "legRZ": 0.025111122789041804,
     "f2X": -1.7018454476974034,
     "f2Y": 0.09817165234674743,
     "f2Z": 0.0070434944296504905,
-    "thighLX": 2.6388725876367109, //2.638
+    "thighLX": 2.6,
     "thighLY": -0.002384419000448791,
     "thighLZ": -0.06817848835524147,
-    "legLX": 1.11330354992098742, //1.11
+    "legLX": 1.11,
     "legLY": 0.0036221256489619006,
     "legLZ": -0.025111122789041804,
     "f1X": -1.7018454476974034,
@@ -770,6 +772,8 @@ this.walkThetaStage4=
     "p1Y": 0.0652798898956343,
     "p1Z": -2.7567248570272826e-9
 }
+
+
 
         }
 
@@ -1216,6 +1220,7 @@ this.walkThetaStage4=
         }
 
         updateAnimation(commands){
+
         switch(this.state){
 
             case 'Idle': 
@@ -1288,6 +1293,8 @@ this.walkThetaStage4=
             break;
 
         }
+
+ 
         if(this.name == "Enemy"){
         
             //this.mesh.getObjectByName("mixamorigHead").quaternion.set(0,this.currentTheta.mixamorigHead,0,1);
@@ -1310,6 +1317,9 @@ this.walkThetaStage4=
         }
         else
         {
+            
+        
+        
             this.mesh.getObjectByName('base_1').rotation.set(this.currentTheta['base_1X'],this.currentTheta['base_1Y'],this.currentTheta['base_1Z'])
             this.mesh.getObjectByName('stomache').rotation.set(this.currentTheta['stomacheX'],this.currentTheta['stomacheY'],this.currentTheta['stomacheZ'])
             this.mesh.getObjectByName('chest_1').rotation.set(this.currentTheta['chest_1X'],this.currentTheta['chest_1Y'],this.currentTheta['chest_1Z'])

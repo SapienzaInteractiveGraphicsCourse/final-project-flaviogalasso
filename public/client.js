@@ -45,7 +45,7 @@ console.log(camera);
 const light = new THREE.AmbientLight( 0x404040 ); // soft white light
 scene.add( light );
 
-const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.2 );
+const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.9 );
 scene.add( directionalLight );
 
 
