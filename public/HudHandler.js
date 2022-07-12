@@ -56,7 +56,7 @@ class HudHandler{
                 this.sceneHUD.add( this.plane );
     }
 
-    introductionScene(difficulty){
+    introductionScene(difficulty,movinglightsEnabled){
         this.hudBitmap.clearRect(0, 0, this.width, this.height);
         this.hudBitmap.strokeText('Planet Invasion', this.width/2, 40);
         this.hudBitmap.fillText('Planet Invasion', this.width/2, 40);
@@ -68,6 +68,9 @@ class HudHandler{
 
         this.hudBitmap.fillText('Select 1-2-3 for difficulty:', 300, this.height/2 + 300 );
         this.hudBitmap.fillText('Selected difficulty:'+difficulty, 300, this.height/2 + 300 +40 );
+
+        this.hudBitmap.fillText('Press S for disabling moving lights:', 300, this.height/2 + 380 );
+        this.hudBitmap.fillText('Moving Lights Status:'+movinglightsEnabled, 300, this.height/2 + 380 +40 );
 
 
 

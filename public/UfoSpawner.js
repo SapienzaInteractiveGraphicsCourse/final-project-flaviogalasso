@@ -26,7 +26,7 @@ class UfoEntity{
         scene.add(this.targetDummy);
     }
 
-    update(clockDelta){
+    update(clockDelta,movinglightsEnabled){
 
         if(this.ticksForChangingDirection >= this.maxTicksForChangingDirection){
             if(Math.random() > this.probabilityOfNotGoingForward){
@@ -45,7 +45,7 @@ class UfoEntity{
         this.UfoModel.mesh.position.z = this.UfoModel.mesh.position.z % this.coordForWrap;
 
 
-
+        if(movinglightsEnabled){
         this.spotLight.position.copy(this.UfoModel.mesh.position);
 
       
@@ -54,6 +54,11 @@ class UfoEntity{
 
         this.spotLight.target = this.targetDummy;
         this.spotLight.angle = Math.PI/15;
+        this.spotLight.visible = true;
+        }
+        else{
+            this.spotLight.visible = false;
+        }
     }
     removeFromScene(scene){
         scene.remove(this.UfoModel.mesh);
@@ -81,10 +86,10 @@ class UfoSpawner {
         console.log("ufos:", this.ufoList);
     }
 
-    update(clockDelta){
+    update(clockDelta,movinglightsEnabled){
         for (var i = 0; i < this.ufoQuantity; i++){
             var Ufo = this.ufoList[i];
-            Ufo.update(clockDelta);
+            Ufo.update(clockDelta,movinglightsEnabled);
         }
     }
 

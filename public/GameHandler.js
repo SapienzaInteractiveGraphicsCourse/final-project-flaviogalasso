@@ -38,6 +38,7 @@ class GameHandler {
 
         this.HudHandler = new HudHandler();
         this.difficulty = "Easy";
+        this.movingLightsEnabled = true;
 
 
 
@@ -108,7 +109,7 @@ class GameHandler {
     }
 
     update(clockDelta){
-        this.UfoSpawner.update(clockDelta);
+        this.UfoSpawner.update(clockDelta,this.movingLightsEnabled);
 
         if(this.gameState == "Game"){
             this.updateGame(clockDelta);
@@ -121,7 +122,7 @@ class GameHandler {
 
     updateIntro(clockDelta){
         this.Controls.update();
-        this.HudHandler.introductionScene(this.difficulty);
+        this.HudHandler.introductionScene(this.difficulty,this.movingLightsEnabled);
         
     }
 
@@ -230,8 +231,12 @@ class GameHandler {
             case 51: //s
             this.difficulty = "Hard";
             break;
+            case 83:
+            this.movingLightsEnabled = !this.movingLightsEnabled;
+            break;
         }
         }
+        
 
     }
 
