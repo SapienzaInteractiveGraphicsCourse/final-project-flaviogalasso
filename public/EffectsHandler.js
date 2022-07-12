@@ -9,7 +9,7 @@ class EffectsHandler{
         this.composer = composer;
         this.clock = new THREE.Clock();
         this.clock.getElapsedTime();
-        this.lowHealthThreshold = 10;
+        this.lowHealthThreshold = 40;
         this.lowAmmoThreshold = 5;
         this.glitchStarted = false;
         this.glitchDuration = 1;
@@ -17,7 +17,7 @@ class EffectsHandler{
 
     update(hp,ammo){
     
-            if (hp < this.lowHealthThreshold || ammo < this.lowAmmoThreshold){
+            if (hp <= this.lowHealthThreshold || ammo <= this.lowAmmoThreshold){
                 this.composer.passes[1].enabled = true;
                 this.composer.passes[0].renderToScreen = false;
             }
