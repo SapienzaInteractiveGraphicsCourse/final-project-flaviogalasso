@@ -45,8 +45,29 @@ console.log(camera);
 const light = new THREE.AmbientLight( 0x404040 ); // soft white light
 scene.add( light );
 
-const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.9 );
+const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.6 );
+directionalLight.position.set(40,40,0);
+directionalLight.castShadow = true; 
+console.log(directionalLight);
+directionalLight.shadow.camera.left = -100;
+directionalLight.shadow.camera.right = 100;
+directionalLight.shadow.camera.top = 100;
+directionalLight.shadow.camera.bottom = -100;
+directionalLight.shadow.bias = -0.005;
+
+directionalLight.shadow.mapSize.width = 3000; // default
+directionalLight.shadow.mapSize.height = 3000; // default
+directionalLight.shadow.camera.near = 0.5; // default
+directionalLight.shadow.camera.far = 500; // default
+
+const lightZeroObject = new THREE.Object3D()
+lightZeroObject.position.set(0,0,1);
+directionalLight.target = lightZeroObject;
+scene.add(lightZeroObject)
+
 scene.add( directionalLight );
+const helper = new THREE.DirectionalLightHelper( directionalLight, 5 );
+scene.add( helper );
 
 
 let SkyBoxEntity = new SkyBox("sky_sp_arcadia");
@@ -82,6 +103,7 @@ renderer.setPixelRatio((window.devicePixelRatio) ? window.devicePixelRatio : 1);
 renderer.autoClear = false;
 renderer.setClearColor = (0x000000, 0.0);
 renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.shadowMap.enabled = true
 console.log(renderer);
 
 const composer = new EffectComposer( renderer );

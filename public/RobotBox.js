@@ -809,6 +809,16 @@ this.walkThetaStage4=
                 child.receiveShadow = true;
                 //child.geometry.computeBoundingBox();
             }
+            if ( child instanceof THREE.SkinnedMesh ) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                //child.geometry.computeBoundingBox();
+            }
+            if ( child instanceof THREE.Bone ) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                //child.geometry.computeBoundingBox();
+            }
    
         });
         /*

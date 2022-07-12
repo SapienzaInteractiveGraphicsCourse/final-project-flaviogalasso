@@ -10,7 +10,7 @@ class UfoEntity{
         this.UfoModel.mesh.position.copy(this.originPosition);
         this.probabilityOfNotGoingForward = 0.50;
         this.spotLight = new THREE.SpotLight(0xffffff);
-        this.coordForWrap = 100;
+        this.coordForWrap = 50;
         this.movementSpeed = 10;
         this.ticksForChangingDirection = 0;
         this.maxTicksForChangingDirection = 10;
