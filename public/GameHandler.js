@@ -154,6 +154,7 @@ class GameHandler {
         if(this.PlayerHandler.RobotModel.health <= 0){
             this.resetEntities();
             this.startIntro();
+            this.EffectsHandler.update(100,100);
         }
     }
 

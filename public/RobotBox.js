@@ -807,11 +807,21 @@ this.walkThetaStage4=
             if ( child instanceof THREE.Mesh ) {
                 child.castShadow = true;
                 child.receiveShadow = true;
+                /*
+                var prevMaterial = child.material;
+                child.material = new THREE.MeshLambertMaterial();
+                THREE.MeshBasicMaterial.prototype.copy.call( child.material, prevMaterial );
+                */
                 //child.geometry.computeBoundingBox();
             }
             if ( child instanceof THREE.SkinnedMesh ) {
                 child.castShadow = true;
                 child.receiveShadow = true;
+                /*
+                var prevMaterial = child.material;
+                child.material = new THREE.MeshLambertMaterial();
+                THREE.MeshBasicMaterial.prototype.copy.call( child.material, prevMaterial );
+                */
                 //child.geometry.computeBoundingBox();
             }
             if ( child instanceof THREE.Bone ) {
@@ -819,6 +829,9 @@ this.walkThetaStage4=
                 child.receiveShadow = true;
                 //child.geometry.computeBoundingBox();
             }
+
+
+
    
         });
         /*

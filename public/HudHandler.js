@@ -63,18 +63,19 @@ class HudHandler{
         this.hudBitmap.strokeText('Flavio Galasso', this.width/2, 80);
         this.hudBitmap.fillText('Flavio Galasso', this.width/2, 80);
 
-        this.hudBitmap.fillText('Kill All The Aliens!', 500, this.height/2 + 100 );
-        this.hudBitmap.fillText(' Pick up Ammunitions and Health to survive!',500, this.height/2 + 140)
+        this.hudBitmap.fillText('Kill All The Aliens!', this.width/2, this.height/2 + 100 );
+        this.hudBitmap.fillText(' Pick up Ammunitions and Health to survive!',this.width/2, this.height/2 + 140)
+        this.hudBitmap.fillText('Click mouse to play!', this.width/2, this.height/2  + 180);
 
-        this.hudBitmap.fillText('Select 1-2-3 for difficulty:', 300, this.height/2 + 300 );
-        this.hudBitmap.fillText('Selected difficulty:'+difficulty, 300, this.height/2 + 300 +40 );
+        this.hudBitmap.fillText('Select 1-2-3 for difficulty:', this.width/2, this.height/2 + 300 );
+        this.hudBitmap.fillText('Selected difficulty:'+difficulty, this.width/2, this.height/2 + 300 +40 );
 
-        this.hudBitmap.fillText('Press S for disabling moving lights:', 300, this.height/2 + 380 );
-        this.hudBitmap.fillText('Moving Lights Status:'+movinglightsEnabled, 300, this.height/2 + 380 +40 );
+        this.hudBitmap.fillText('Press S for disabling moving lights:', this.width/2, this.height/2 + 380 );
+        this.hudBitmap.fillText('Moving Lights Status:'+movinglightsEnabled, this.width/2, this.height/2 + 380 +40 );
 
 
 
-        this.hudBitmap.fillText('Click mouse to play:', this.width-300, this.height/2 + 300 );
+      
 
         
         this.hudTexture.needsUpdate = true;

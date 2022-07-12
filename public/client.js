@@ -67,7 +67,7 @@ scene.add(lightZeroObject)
 
 scene.add( directionalLight );
 const helper = new THREE.DirectionalLightHelper( directionalLight, 5 );
-scene.add( helper );
+//scene.add( helper );
 
 
 let SkyBoxEntity = new SkyBox("sky_sp_arcadia");
