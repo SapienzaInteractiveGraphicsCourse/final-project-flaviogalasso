@@ -103,6 +103,7 @@ class RobotBox{
         this.jumpAvailable = true;
         this.jumpTicks = 0;
         this.jumpAnimationEnded = false;
+        this.jumpUpCommand = false;
 
         this.shootOffset = new THREE.Vector3(-1, 2,2);
         this.shootTargetOffset = new THREE.Vector3(0,3,0);
@@ -115,6 +116,83 @@ class RobotBox{
 
             this.idleTheta = {
                 Head:0,
+                HeadZ: 0.0,
+
+                // Left Arm
+                LeftArmX:0,
+                LeftArmY:0,
+                LeftArmZ:0,
+
+                // Right Arm
+                RightArmX:0,
+                RightArmY:0,
+                RightArmZ:0,
+
+                //Left Upper Leg
+                LeftUpLegX: 0,
+                LeftUpLegY: 0,
+                LeftUpLegZ: 3.14,
+
+                //Right Upper Leg
+                RightUpLegX: 0,
+                RightUpLegY: 0,
+                RightUpLegZ: 3.14,
+
+                //Body
+                SpineX: 0,
+
+                //Left Leg
+                LeftLegX: 0,
+                LeftLegY: 0,
+                LeftLegZ: 0,
+
+                //Right Leg
+                RightLegX: 0,
+                RightLegY: 0,
+                RightLegZ: 0,
+            };
+
+            this.idleThetaStage1 = {
+                Head:0,
+                HeadZ: 0.2,
+
+                // Left Arm
+                LeftArmX:0,
+                LeftArmY:0,
+                LeftArmZ:0,
+
+                // Right Arm
+                RightArmX:0,
+                RightArmY:0,
+                RightArmZ:0,
+
+                //Left Upper Leg
+                LeftUpLegX: 0,
+                LeftUpLegY: 0,
+                LeftUpLegZ: 3.14,
+
+                //Right Upper Leg
+                RightUpLegX: 0,
+                RightUpLegY: 0,
+                RightUpLegZ: 3.14,
+
+                //Body
+                SpineX: 0,
+
+                //Left Leg
+                LeftLegX: 0,
+                LeftLegY: 0,
+                LeftLegZ: 0,
+
+                //Right Leg
+                RightLegX: 0,
+                RightLegY: 0,
+                RightLegZ: 0,
+            };
+
+            this.idleThetaStage2 = {
+                Head:0,
+                HeadZ: -0.2,
 
                 // Left Arm
                 LeftArmX:0,
@@ -152,6 +230,7 @@ class RobotBox{
 
             this.currentTheta = {
                 Head:0,
+                HeadZ:0,
 
                 // Left Arm
                 LeftArmX:0,
@@ -192,6 +271,7 @@ class RobotBox{
                 };
             
             this.walkThetaStage1 = {
+                HeadZ: 0,
                 SpineX: 0.513,
                 LeftArmZ: 0.2,
                 RightArmZ: 0.2,
@@ -374,6 +454,142 @@ class RobotBox{
     "p1Z": -2.7567248570272826e-9
 }
 
+this.idleThetaStage1=
+{
+    "base_1X": 0.03997873202194714,
+    "base_1Y": 0,
+    "base_1Z": 0,
+    "stomacheX": -0.073,
+    "stomacheY": -0.5,
+    "stomacheZ": 0,
+    "chest_1X": -0.1318277013968113,
+    "chest_1Y": 0,
+    "chest_1Z": 0,
+    "neckX": 0.6722469711332419,
+    "neckY": 2.3841850115938654e-7,
+    "neckZ": 2.1415186298406237e-14,
+    "headX": -0.5070982803828901,
+    "headY": -2.084152952057006e-7,
+    "headZ": -1.1578621926952094e-7,
+    "sholdrLX": 0.061336524879602,
+    "sholdrLY": 0.19061001963853602,
+    "sholdrLZ": -2.050688083467387,
+    "uparmLX": 0.0017243083952209358,
+    "uparmLY": -0.04223495519177904,
+    "uparmLZ": -0.8266779221147016,
+    "BotarmLX": 0.48569338637270015,
+    "BotarmLY": -0.034334654688150404,
+    "BotarmLZ": -0.1289355159878485,
+    "handLX": 0,
+    "handLY": 0.03306541351716344,
+    "handLZ": -0.10283799167019156,
+    "sholdrRX": 0.061336640907709086,
+    "sholdrRY": -0.19060982634939838,
+    "sholdrRZ": 2.1,
+    "uparmRX": 0.0017242791737077615,
+    "uparmRY": 0.04223519408225165,
+    "uparmRZ": 0.7671267947848937,
+    "BotarmRX": 0.4856932556121642,
+    "BotarmRY": 0.03433494867881172,
+    "BotarmRZ": 0.12893561225529454,
+    "handRX": 0,
+    "handRY": -0.033064935933625826,
+    "handRZ": 0.10283802047728159,
+    "thighRX": 3.138725876367109,
+    "thighRY": 0.002384419000448791,
+    "thighRZ": 0.06817848835524147,
+    "legRX": 0.09330354992098742,
+    "legRY": -0.0036221256489619006,
+    "legRZ": 0.025111122789041804,
+    "f2X": -1.7018454476974034,
+    "f2Y": 0.09817165234674743,
+    "f2Z": 0.0070434944296504905,
+    "thighLX": 3.138725876367109,
+    "thighLY": -0.002384419000448791,
+    "thighLZ": -0.06817848835524147,
+    "legLX": 0.09330354992098742,
+    "legLY": 0.0036221256489619006,
+    "legLZ": -0.025111122789041804,
+    "f1X": -1.7018454476974034,
+    "f1Y": -0.09817165234674743,
+    "f1Z": -0.0070434944296504905,
+    "p2X": 1.5707964289810077,
+    "p2Y": -0.0652798898956343,
+    "p2Z": 2.7567248570272826e-9,
+    "p1X": 1.5707964289810077,
+    "p1Y": 0.0652798898956343,
+    "p1Z": -2.7567248570272826e-9
+}
+
+this.idleThetaStage2=
+{
+    "base_1X": 0.03997873202194714,
+    "base_1Y": 0,
+    "base_1Z": 0,
+    "stomacheX": -0.073,
+    "stomacheY": 0.5,
+    "stomacheZ": 0,
+    "chest_1X": -0.1318277013968113,
+    "chest_1Y": 0,
+    "chest_1Z": 0,
+    "neckX": 0.6722469711332419,
+    "neckY": 2.3841850115938654e-7,
+    "neckZ": 2.1415186298406237e-14,
+    "headX": -0.5070982803828901,
+    "headY": -2.084152952057006e-7,
+    "headZ": -1.1578621926952094e-7,
+    "sholdrLX": 0.061336524879602,
+    "sholdrLY": 0.19061001963853602,
+    "sholdrLZ": -2.050688083467387,
+    "uparmLX": 0.0017243083952209358,
+    "uparmLY": -0.04223495519177904,
+    "uparmLZ": -0.8266779221147016,
+    "BotarmLX": 0.48569338637270015,
+    "BotarmLY": -0.034334654688150404,
+    "BotarmLZ": -0.1289355159878485,
+    "handLX": 0,
+    "handLY": 0.03306541351716344,
+    "handLZ": -0.10283799167019156,
+    "sholdrRX": 0.061336640907709086,
+    "sholdrRY": -0.19060982634939838,
+    "sholdrRZ": 2.1,
+    "uparmRX": 0.0017242791737077615,
+    "uparmRY": 0.04223519408225165,
+    "uparmRZ": 0.7671267947848937,
+    "BotarmRX": 0.4856932556121642,
+    "BotarmRY": 0.03433494867881172,
+    "BotarmRZ": 0.12893561225529454,
+    "handRX": 0,
+    "handRY": -0.033064935933625826,
+    "handRZ": 0.10283802047728159,
+    "thighRX": 3.138725876367109,
+    "thighRY": 0.002384419000448791,
+    "thighRZ": 0.06817848835524147,
+    "legRX": 0.09330354992098742,
+    "legRY": -0.0036221256489619006,
+    "legRZ": 0.025111122789041804,
+    "f2X": -1.7018454476974034,
+    "f2Y": 0.09817165234674743,
+    "f2Z": 0.0070434944296504905,
+    "thighLX": 3.138725876367109,
+    "thighLY": -0.002384419000448791,
+    "thighLZ": -0.06817848835524147,
+    "legLX": 0.09330354992098742,
+    "legLY": 0.0036221256489619006,
+    "legLZ": -0.025111122789041804,
+    "f1X": -1.7018454476974034,
+    "f1Y": -0.09817165234674743,
+    "f1Z": -0.0070434944296504905,
+    "p2X": 1.5707964289810077,
+    "p2Y": -0.0652798898956343,
+    "p2Z": 2.7567248570272826e-9,
+    "p1X": 1.5707964289810077,
+    "p1Y": 0.0652798898956343,
+    "p1Z": -2.7567248570272826e-9
+}
+
+
+
 this.shootTheta=
 {
     "base_1X": 0.03997873202194714,
@@ -441,7 +657,75 @@ this.shootTheta=
     "p1Z": -2.7567248570272826e-9
 }
 
-this.jumpTheta=
+this.jumpThetaStage1=
+{
+    "base_1X": 0.03997873202194714,
+    "base_1Y": 0,
+    "base_1Z": 0,
+    "stomacheX": -0.07329968451400774,
+    "stomacheY": 0,
+    "stomacheZ": 0,
+    "chest_1X": 0.7718277013968113,
+    "chest_1Y": 0,
+    "chest_1Z": 0,
+    "neckX": 0.6722469711332419,
+    "neckY": 2.3841850115938654e-7,
+    "neckZ": 2.1415186298406237e-14,
+    "headX": -0.5070982803828901,
+    "headY": -2.084152952057006e-7,
+    "headZ": -1.1578621926952094e-7,
+    "sholdrLX": 0.061336524879602,
+    "sholdrLY": 0.19061001963853602,
+    "sholdrLZ": -2.050688083467387,
+    "uparmLX": 0.0017243083952209358,
+    "uparmLY": -0.04223495519177904,
+    "uparmLZ": -0.8266779221147016,
+    "BotarmLX": 0.48569338637270015,
+    "BotarmLY": -0.034334654688150404,
+    "BotarmLZ": -0.1289355159878485,
+    "handLX": 0,
+    "handLY": 0.03306541351716344,
+    "handLZ": -0.10283799167019156,
+    "sholdrRX": 0.061336640907709086,
+    "sholdrRY": -0.19060982634939838,
+    "sholdrRZ": 2.1,
+    "uparmRX": 0.0017242791737077615,
+    "uparmRY": 0.04223519408225165,
+    "uparmRZ": 0.7671267947848937,
+    "BotarmRX": 0.4856932556121642,
+    "BotarmRY": 0.03433494867881172,
+    "BotarmRZ": 0.12893561225529454,
+    "handRX": 0,
+    "handRY": -0.033064935933625826,
+    "handRZ": 0.10283802047728159,
+    "thighRX": 2.608725876367109,
+    "thighRY": 0.002384419000448791,
+    "thighRZ": 0.06817848835524147,
+    "legRX": 0.92530354992098742,
+    "legRY": -0.0036221256489619006,
+    "legRZ": 0.025111122789041804,
+    "f2X": -1.7018454476974034,
+    "f2Y": 0.09817165234674743,
+    "f2Z": 0.0070434944296504905,
+    "thighLX": 2.60725876367109,
+    "thighLY": -0.002384419000448791,
+    "thighLZ": -0.06817848835524147,
+    "legLX": 0.92530354992098742,
+    "legLY": 0.0036221256489619006,
+    "legLZ": -0.025111122789041804,
+    "f1X": -1.7018454476974034,
+    "f1Y": -0.09817165234674743,
+    "f1Z": -0.0070434944296504905,
+    "p2X": 1.5707964289810077,
+    "p2Y": -0.0652798898956343,
+    "p2Z": 2.7567248570272826e-9,
+    "p1X": 1.5707964289810077,
+    "p1Y": 0.0652798898956343,
+    "p1Z": -2.7567248570272826e-9
+}
+
+
+this.jumpThetaStage2=
 {
     "base_1X": 0.03997873202194714,
     "base_1Y": 0,
@@ -961,11 +1245,14 @@ this.walkThetaStage4=
               }
 
               if(!this.jumpAvailable){
+                  if(this.jumpUpCommand){
                   this.jumpTicks += 0.1;
                   this.mesh.position.y += Math.sin(this.jumpTicks) * this.jumpVelocity;
                   if(this.jumpTicks >= 2*Math.PI){
                       this.jumpAvailable = true;
+                      this.jumpUpCommand = false;
                   }
+                }
               }
 
             if(this.collisionGroundHappened && this.jumpAvailable){
@@ -1201,12 +1488,35 @@ this.walkThetaStage4=
             this.idleTween = new TWEEN.Tween(this.currentTheta)
             .to(this.idleTheta,200)
             .easing(TWEEN.Easing.Quadratic.InOut);
+            this.idleTween1 = new TWEEN.Tween(this.currentTheta)
+            .to(this.idleThetaStage1,800)
+            .easing(TWEEN.Easing.Quadratic.InOut);
+            this.idleTween2 = new TWEEN.Tween(this.currentTheta)
+            .to(this.idleThetaStage2,1600)
+            .easing(TWEEN.Easing.Quadratic.InOut);
+            this.idleTween3 = new TWEEN.Tween(this.currentTheta)
+            .to(this.idleTheta,800)
+            .easing(TWEEN.Easing.Quadratic.InOut);
+
+            this.idleTween.chain(this.idleTween1);
+            this.idleTween1.chain(this.idleTween2);
+            this.idleTween2.chain(this.idleTween3);
+            this.idleTween3.chain(this.idleTween);
+
         }
 
 
         initJumpUpAnimation(){
+
             this.jumpUpTween = new TWEEN.Tween(this.currentTheta)
-            .to(this.jumpTheta,200)
+            .to(this.jumpThetaStage1,200)
+            .easing(TWEEN.Easing.Quadratic.InOut)
+            .onComplete(function(){
+                this.jumpUpCommand = true;
+            }.bind(this));
+
+            this.jumpUpTween2 = new TWEEN.Tween(this.currentTheta)
+            .to(this.jumpThetaStage2,200)
             .easing(TWEEN.Easing.Quadratic.InOut)
             .onComplete(function(){
                 this.jumpAnimationEnded = true;
@@ -1217,7 +1527,8 @@ this.walkThetaStage4=
             .to(this.idleTheta,200)
             .easing(TWEEN.Easing.Quadratic.InOut)
 
-            this.jumpUpTween.chain( this.jumpDownTween)
+            this.jumpUpTween.chain(this.jumpUpTween2);
+            this.jumpUpTween2.chain( this.jumpDownTween);
            
         }
 
@@ -1331,8 +1642,8 @@ this.walkThetaStage4=
             this.mesh.getObjectByName("mixamorigRightArm").rotation.set(this.currentTheta.RightArmX,this.currentTheta.RightArmY,this.currentTheta.RightArmZ );
             this.mesh.getObjectByName("mixamorigRightUpLeg").rotation.set(this.currentTheta.RightUpLegX,this.currentTheta.RightUpLegY,this.currentTheta.RightUpLegZ );
             this.mesh.getObjectByName("mixamorigRightLeg").rotation.set(this.currentTheta.RightLegX,this.currentTheta.RightLegY,this.currentTheta.RightLegZ );
-            
-          
+            this.mesh.getObjectByName("mixamorigHead").rotation.z = this.currentTheta.HeadZ;
+          //console.log(this.mesh.getObjectByName("mixamorigHead"))
             //console.log(this.currentTheta)
             //console.log(this.mesh)
 
