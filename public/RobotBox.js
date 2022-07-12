@@ -1246,7 +1246,7 @@ this.walkThetaStage4=
 
               if(!this.jumpAvailable){
                   if(this.jumpUpCommand){
-                  this.jumpTicks += 0.1;
+                  this.jumpTicks += 5 * clockDelta;
                   this.mesh.position.y += Math.sin(this.jumpTicks) * this.jumpVelocity;
                   if(this.jumpTicks >= 2*Math.PI){
                       this.jumpAvailable = true;
