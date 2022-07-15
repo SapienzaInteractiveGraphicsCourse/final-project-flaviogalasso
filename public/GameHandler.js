@@ -1,6 +1,6 @@
 import * as THREE from '/build/three.module.js';
 import {ProjectileHandler} from './ProjectileHandler.js'
-import {PickUpHandler} from './PickUpHandler.js'
+import {PickUpHandler} from './PickupHandler.js'
 import {EnemyHandler} from './EnemyHandler.js'
 import {PlayerHandler} from './PlayerHandler.js'
 import {HudHandler} from './HudHandler.js'
