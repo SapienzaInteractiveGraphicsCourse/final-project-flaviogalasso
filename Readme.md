@@ -6,7 +6,7 @@
 
 <img title="" src="./Images/intro.png" alt="" width="592">
 
-This is the **Offline-Version Repo!**, go to this link: [Planet Invasion](https://redmodder.github.io/planetinvasion.github.io/) for the online version, but beware: **be patient while the models load** and only **Google Chrome** is supported! 
+This is the **Offline-Version Repo!**, go to this link: [Planet Invasion](https://flaviogalasso.github.io/planetinvasion.github.io/) for the online version, but beware: **be patient while the models load** and only **Google Chrome** is supported! 
 
 ## Introduction:
 
